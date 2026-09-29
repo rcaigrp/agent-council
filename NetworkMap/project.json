@@ -1,0 +1,9 @@
+{
+  "name": "NetworkMap",
+  "description": "A project to visualize network connectivity.",
+  "version": "0.1",
+  "dependencies": [
+    "requests",
+    "flask"
+  ]
+}

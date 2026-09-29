@@ -1,0 +1,1 @@
+{ "scan_results": [{"ip": "192.168.1.1", "status": "reachable"}, {"ip": "192.168.1.2", "status": "unreachable"}]}

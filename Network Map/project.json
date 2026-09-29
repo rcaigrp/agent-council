@@ -1,0 +1,1 @@
+{ "name": "Network Map", "description": "An app that runs in a docker container that will scan the network that docker runs on for all of the devices on the network and creates an interactive map that will allow the user to click on the devices and see details about them.", "technologies": ["Docker", "Python", "Network Scanning", "Interactive Map"] }

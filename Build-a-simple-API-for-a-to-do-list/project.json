@@ -1,0 +1,14 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "description": "Implement user authentication",
+      "status": "in progress"
+    },
+    {
+      "id": 2,
+      "description": "Create API endpoints",
+      "status": "to do"
+    }
+  ]
+}
