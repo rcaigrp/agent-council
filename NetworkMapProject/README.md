@@ -38,3 +38,4 @@ If you see ResourceWarnings about unclosed sockets, ensure your Python version i
 ---
 ✅ **PROJECT COMPLETE**
 All acceptance criteria have been met and tests pass successfully.
+---
