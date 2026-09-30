@@ -18,7 +18,7 @@ python network_scanner.py --host 192.168.1.0/24 --port 22 80 443 --timeout 1
 To run tests:
 
 ```bash
-python -m pytest test_scanner.py
+python -m pytest test_scanner_final.py
 ```
 
 ## Features
