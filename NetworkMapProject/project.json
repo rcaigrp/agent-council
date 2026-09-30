@@ -1,1 +1,16 @@
-{"goal": "Create a network scanner that performs comprehensive network scans, gathers device information, and outputs results in JSON format.", "acceptance_criteria": ["Implement scan_port function for port scanning", "Implement resolve_host function for DNS resolution", "Implement scan_network function for network scanning", "Support CIDR notation in host specification", "Include proper error handling for socket operations", "Output results in JSON format", "Support timeout configuration", "Validate input ports and hosts", "Comprehensive test suite passes with proper socket handling and DNS resolution"], "meeting_budget": 10, "meetings_held": 30, "status": "complete"}
+{
+  "goal": "Develop a network scanning tool that can scan ports on hosts and output results in JSON format.",
+  "acceptance_criteria": [
+    "Script accepts --host, --port, --timeout, and --output arguments",
+    "Properly handles CIDR notation in host specification",
+    "Supports multiple port ranges",
+    "Includes comprehensive error handling for socket operations",
+    "Provides detailed logging for debugging and progress tracking",
+    "Input validation for ports and hosts",
+    "JSON output format for easy parsing",
+    "All tests pass with pytest"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 30,
+  "status": "complete"
+}
