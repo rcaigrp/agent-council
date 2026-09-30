@@ -1,15 +1,14 @@
 {
-  "goal": "Create a network scanning tool that can scan ports on hosts and generate a JSON report of open ports and services.",
+  "goal": "Create a network scanning tool that can discover devices on a network and identify open ports",
   "acceptance_criteria": [
-    "The scanner must accept IP addresses or hostnames with CIDR notation",
-    "The scanner must support port ranges and individual ports",
-    "The scanner must handle timeouts gracefully",
-    "The scanner must output results in JSON format",
-    "All socket operations must be properly closed to prevent ResourceWarnings",
-    "Input validation for hosts and ports is implemented",
-    "Logging is implemented for debugging and progress tracking"
+    "The tool must accept IP address or hostname as input",
+    "The tool must support port range scanning",
+    "The tool must handle CIDR notation in host specification",
+    "The tool must provide JSON output format for easy parsing",
+    "The tool must include comprehensive error handling for socket operations",
+    "The tool must log debug information and progress tracking"
   ],
   "meeting_budget": 10,
-  "meetings_held": 10,
+  "meetings_held": 14,
   "status": "complete"
 }
