@@ -8,17 +8,30 @@ Active
 
 ## Acceptance Criteria
 - [x] Application can collect sleep data from smartphone sensors
-- [ ] Sleep data is analyzed to identify patterns and quality metrics
+- [x] Sleep data is analyzed to identify patterns and quality metrics
 - [ ] Personalized recommendations are generated for sleep improvement
 
 ## Completed Work
 - [x] Initial project setup and documentation
 - [x] Sensor data collection module implementation
+- [x] Data analysis algorithms implementation
 
 ## Next Steps
-1. Develop data analysis algorithms
-2. Create recommendation engine
-3. Design UI/UX for the mobile app
+1. Create recommendation engine
+2. Design UI/UX for the mobile app
 
 ## Files
 - `sensor_data_collector.py` - Module for collecting and processing sensor data
+- `data_analyzer.py` - Module for analyzing sleep patterns and calculating quality metrics
+- `test_data_analyzer.py` - Unit tests for the data analyzer module
+
+## How to Run Tests
+```bash
+python test_data_analyzer.py
+```
+
+## Data Analysis Overview
+The sleep data analysis module processes sensor data to:
+1. Detect sleep periods based on movement patterns
+2. Calculate sleep quality metrics including duration and restlessness index
+3. Generate insights for personalized recommendations
