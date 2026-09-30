@@ -1,13 +1,13 @@
 {
-  "goal": "Create a network scanner that performs comprehensive network scans, gathering information about devices and their connectivity.",
+  "goal": "Create a network scanning tool that can identify devices and their connectivity on a network",
   "acceptance_criteria": [
-    "Script handles all specified parameters correctly (host, port, timeout, output)",
-    "Comprehensive error handling for socket operations",
-    "Detailed logging for debugging and progress tracking",
-    "Input validation for ports and hosts",
-    "Support for CIDR notation in host specification",
-    "JSON output format for easy parsing",
-    "All tests pass with proper socket handling and DNS resolution"
+    "The script must accept host, port, timeout, and output parameters",
+    "It should handle CIDR notation in host specification",
+    "Socket operations must have proper error handling",
+    "DNS resolution should work correctly",
+    "Output must be in JSON format",
+    "All tests pass with pytest",
+    "Code is published to GitHub"
   ],
   "meeting_budget": 10,
   "meetings_held": 11,
