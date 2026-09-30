@@ -1,14 +1,16 @@
 {
-  "goal": "Create a network scanning tool that performs comprehensive network scans, gathering information about devices and their connectivity",
-  "acceptance_criteria": [
-    "Script supports CIDR notation in host specification",
-    "Script handles socket operations with proper error handling",
-    "Script validates input for ports and hosts",
-    "Script outputs results in JSON format",
-    "All network scanning functions are properly exported and accessible",
-    "Comprehensive test suite passes with proper socket handling and DNS resolution"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 21,
-  "status": "complete"
+    "goal": "Create a network scanning tool that can scan ports, resolve hosts, and generate network topology maps",
+    "acceptance_criteria": [
+        "Network scanner script accepts --host, --port, --timeout, and --output parameters",
+        "Script properly handles CIDR notation in host specification",
+        "Socket operations are properly handled with error handling for timeouts and connection issues",
+        "DNS resolution works correctly for hostnames",
+        "Output is generated in JSON format as specified",
+        "All functions are properly exported and accessible",
+        "Comprehensive test suite passes with proper socket handling and DNS resolution",
+        "No ResourceWarnings about unclosed sockets"
+    ],
+    "meeting_budget": 10,
+    "meetings_held": 21,
+    "status": "complete"
 }
