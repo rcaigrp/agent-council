@@ -1,7 +1,1 @@
-{
-  "name": "To-Do API for Network Map",
-  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
-  "version": "1.0",
-  "author": "AI Assistant",
-  "meetings_held": 18
-}
+{"goal": "Create a network scanning tool that can discover devices, identify open ports, and generate topology maps.", "acceptance_criteria": ["Tool scans networks using CIDR notation", "Supports port scanning for specified ranges", "Provides JSON output format", "Includes proper error handling for socket operations", "Validates input parameters for hosts and ports", "Generates detailed logging for debugging", "All tests pass with pytest"], "meeting_budget": 10, "meetings_held": 18, "status": "complete"}
