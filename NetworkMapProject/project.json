@@ -1,17 +1,7 @@
 {
-  "goal": "Create a comprehensive network scanner that can identify active devices and open ports on a network",
-  "acceptance_criteria": [
-    "Script must accept IP address or hostname for scanning",
-    "Support for CIDR notation in host specification",
-    "Ability to scan multiple ports at once",
-    "Timeout configuration for socket operations",
-    "JSON output format for results",
-    "Proper error handling for network and socket operations",
-    "Input validation for ports and hosts",
-    "Detailed logging capability",
-    "Comprehensive test suite with pytest"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 29,
-  "status": "complete"
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 30
 }
