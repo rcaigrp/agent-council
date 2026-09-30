@@ -1,1 +1,14 @@
-{"goal": "Create a network scanning tool that can scan ports, resolve hosts, and generate network topology reports", "acceptance_criteria": ["Tool can scan specified IP ranges and ports", "Tool handles DNS resolution correctly", "Tool generates JSON output for network topology", "All socket operations are properly handled with timeouts", "Comprehensive test suite passes with 100% coverage"], "meeting_budget": 10, "meetings_held": 19, "status": "complete"}
+{
+  "goal": "Create a network scanning tool that can perform comprehensive scans of networks, gather device information, and output results in JSON format.",
+  "acceptance_criteria": [
+    "The tool must support scanning IP ranges using CIDR notation",
+    "It must scan specified ports on each host and report open/closed status",
+    "Proper error handling for socket operations and DNS resolution is implemented",
+    "Output must be in JSON format for easy parsing",
+    "All functions are properly exported and accessible",
+    "Comprehensive test suite passes with proper socket handling and DNS resolution"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 19,
+  "status": "complete"
+}
