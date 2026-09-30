@@ -1,53 +1,47 @@
-# Network Scanner Implementation
+# Network Scanner Module
 import socket
-import json
-from typing import List, Dict, Any
+import logging
+from typing import List, Tuple, Optional
 
-def scan_port(host: str, port: int, timeout: float = 1.0) -> bool:
-    """
-    Scan a single port on a given host.
-    Returns True if the port is open, False otherwise.
-    """
-    sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.settimeout(timeout)
-    try:
-        result = sock.connect_ex((host, port))
-        return result == 0
-    except socket.gaierror:
-        # DNS resolution failed - return False instead of re-raising
-        return False
-    except Exception:
-        # Other socket errors - return False
-        return False
-    finally:
-        sock.close()
+class NetworkScanner:
+    def __init__(self, timeout: int = 1):
+        self.timeout = timeout
+        self.logger = logging.getLogger(__name__)
 
-def scan_host(host: str, ports: List[int], timeout: float = 1.0) -> Dict[str, Any]:
-    """
-    Scan multiple ports on a single host.
-    Returns a dictionary with results.
-    """
-    results = {}
-    for port in ports:
+    def scan_port(self, host: str, port: int) -> bool:
+        """
+        Scan a single port on a given host.
+        Returns True if the port is open, False otherwise.
+        """
         try:
-            results[port] = scan_port(host, port, timeout)
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            sock.settimeout(self.timeout)
+            result = sock.connect_ex((host, port))
+            sock.close()  # Ensure socket is closed
+            return result == 0
+        except socket.gaierror:
+            self.logger.error(f'DNS resolution failed for {host}')
+            return False  # Return False instead of re-raising
         except Exception as e:
-            # Handle any unexpected errors
-            results[port] = False
-    return results
+            self.logger.error(f'Unexpected error scanning {host}:{port} - {e}')
+            return False
 
-def scan_network(network: str, ports: List[int], timeout: float = 1.0) -> Dict[str, Any]:
-    """
-    Scan a network for open ports.
-    Supports CIDR notation.
-    """
-    # Simplified implementation - in real usage, would use ipaddress module
-    results = {}
-    try:
-        # This is a placeholder for actual network scanning logic
-        # In production, you'd want to properly parse CIDR and iterate hosts
-        results[network] = scan_host(network, ports, timeout)
-    except Exception as e:
-        print(f"Error scanning network {network}: {e}")
-        results[network] = {}
-    return results
+    def scan_host(self, host: str, ports: List[int]) -> dict:
+        """
+        Scan multiple ports on a single host.
+        Returns a dictionary mapping port numbers to boolean results.
+        """
+        results = {}
+        for port in ports:
+            results[port] = self.scan_port(host, port)
+        return results
+
+    def scan_network(self, hosts: List[str], ports: List[int]) -> dict:
+        """
+        Scan multiple ports on multiple hosts.
+        Returns a nested dictionary with host keys and port mappings.
+        """
+        results = {}
+        for host in hosts:
+            results[host] = self.scan_host(host, ports)
+        return results

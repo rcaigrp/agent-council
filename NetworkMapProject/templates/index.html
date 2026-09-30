@@ -1,50 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Network Map Dashboard</title>
+    <title>Network Scanner Results</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
-        .scan-form { margin-bottom: 20px; }
-        .scan-form input, .scan-form button { padding: 5px; margin: 5px; }
-        .results { border: 1px solid #ccc; padding: 10px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .status-open { color: green; }
+        .status-closed { color: red; }
     </style>
 </head>
 <body>
-    <h1>Network Scanner Dashboard</h1>
+    <h1>Network Scan Results</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Host</th>
+                <th>Port</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Results will be populated by JavaScript -->
+        </tbody>
+    </table>
     
-    <div class="scan-form">
-        <form id="scanForm">
-            <input type="text" id="hostInput" placeholder="Enter IP or CIDR (e.g., 192.168.1.0/24)" required>
-            <input type="text" id="portInput" placeholder="Comma-separated ports (e.g., 22,80,443)" value="22,80,443">
-            <input type="number" id="timeoutInput" placeholder="Timeout (seconds)" value="1">
-            <button type="submit">Scan Network</button>
-        </form>
-    </div>
-    
-    <div class="results" id="resultsContainer">
-        <p>Scan results will appear here after running the scanner.</p>
-    </div>
-
     <script>
-        document.getElementById('scanForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const host = document.getElementById('hostInput').value;
-            const ports = document.getElementById('portInput').value;
-            const timeout = document.getElementById('timeoutInput').value;
-            
-            fetch('/scan', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({host, ports, timeout})
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('resultsContainer').innerHTML = '<pre>' + JSON.stringify(data, null, 2) + '</pre>';
-            });
-        });
+        // Simple data display
+        const results = {{ results|tojson }};
+        
+        const tableBody = document.querySelector('tbody');
+        
+        for (const [host, ports] of Object.entries(results)) {
+            for (const [port, status] of Object.entries(ports)) {
+                const row = document.createElement('tr');
+                
+                const hostCell = document.createElement('td');
+                hostCell.textContent = host;
+                row.appendChild(hostCell);
+                
+                const portCell = document.createElement('td');
+                portCell.textContent = port;
+                row.appendChild(portCell);
+                
+                const statusCell = document.createElement('td');
+                statusCell.textContent = status ? 'Open' : 'Closed';
+                statusCell.className = status ? 'status-open' : 'status-closed';
+                row.appendChild(statusCell);
+                
+                tableBody.appendChild(row);
+            }
+        }
     </script>
 </body>
 </html>
