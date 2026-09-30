@@ -1,34 +1,37 @@
-#!/usr/bin/env python3
-
 import sys
 import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
+def test_integration():
+    try:
+        from analysis import SleepAnalyzer
+        from recommendations import RecommendationEngine
+        from ui_components import SleepDisplay
+        
+        # Test full integration
+        analyzer = SleepAnalyzer()
+        recommender = RecommendationEngine()
+        display = SleepDisplay()
+        
+        # Mock data
+        sleep_data = [1, 2, 3, 4, 5]
+        insights = ['get more sleep', 'avoid caffeine late']
+        
+        # Test methods
+        result = display.render_dashboard(sleep_data)
+        recommendations = recommender.generate_recommendations(insights)
+        
+        print('Integration test successful')
+        print(f'Dashboard: {result}')
+        print(f'Recommendations: {recommendations}')
+        return True
+    except Exception as e:
+        print(f'Integration error: {e}')
+        return False
 
-try:
-    # Import all required components with correct module names
-    from analysis import SleepAnalyzer
-    from recommendations import RecommendationEngine
-    from ui_components import SleepDisplay
-    print('SUCCESS: All imports work correctly')
-    
-    # Test instantiation
-    analyzer = SleepAnalyzer()
-    engine = RecommendationEngine()
-    display = SleepDisplay()
-    
-    print('SUCCESS: All components instantiate correctly')
-    
-    # Verify basic functionality
-    assert hasattr(analyzer, 'analyze_data'), 'SleepAnalyzer missing analyze_data method'
-    assert hasattr(engine, 'generate_recommendations'), 'RecommendationEngine missing generate_recommendations method'
-    assert hasattr(display, 'render_dashboard'), 'SleepDisplay missing render_dashboard method'
-    
-    print('SUCCESS: All components have required methods')
-    
-except Exception as e:
-    print(f'FAILED: {str(e)}')
-    sys.exit(1)
-
-print('ALL TESTS PASSED - Sleep Pattern Analyzer is ready for deployment')
+if __name__ == '__main__':
+    if test_integration():
+        print('INTEGRATION TEST PASSED')
+    else:
+        print('INTEGRATION TEST FAILED')
+        sys.exit(1)

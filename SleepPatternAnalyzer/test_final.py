@@ -1,27 +1,40 @@
-#!/usr/bin/env python3
-
 import sys
 import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, current_dir)
+def test_imports():
+    try:
+        from analysis import SleepAnalyzer
+        from recommendations import RecommendationEngine
+        from ui_components import SleepDisplay
+        print('All imports successful')
+        return True
+    except ImportError as e:
+        print(f'Import error: {e}')
+        return False
 
-try:
-    from analysis import SleepAnalyzer
-    from recommendations import RecommendationEngine
-    print('SUCCESS: Core modules imported correctly')
-    
-    # Test basic instantiation
-    analyzer = SleepAnalyzer()
-    engine = RecommendationEngine()
-    
-    print('SUCCESS: Components created successfully')
-    
-except ImportError as e:
-    print(f'FAILED: Import error - {str(e)}')
-    sys.exit(1)
-except Exception as e:
-    print(f'FAILED: Runtime error - {str(e)}')
-    sys.exit(1)
+def test_functionality():
+    try:
+        from analysis import SleepAnalyzer
+        from recommendations import RecommendationEngine
+        from ui_components import SleepDisplay
+        
+        # Test basic functionality
+        analyzer = SleepAnalyzer()
+        recommender = RecommendationEngine()
+        display = SleepDisplay()
+        
+        print('All classes instantiated successfully')
+        return True
+    except Exception as e:
+        print(f'Functionality error: {e}')
+        return False
 
-print('Integration test completed successfully')
+if __name__ == '__main__':
+    success1 = test_imports()
+    success2 = test_functionality()
+    if success1 and success2:
+        print('TEST PASSED')
+    else:
+        print('TEST FAILED')
+        sys.exit(1)
