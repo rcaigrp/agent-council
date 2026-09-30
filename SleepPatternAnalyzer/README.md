@@ -7,15 +7,18 @@ Create a mobile application that tracks sleep patterns using smartphone sensors 
 Active
 
 ## Acceptance Criteria
-- [ ] Application can collect sleep data from smartphone sensors
+- [x] Application can collect sleep data from smartphone sensors
 - [ ] Sleep data is analyzed to identify patterns and quality metrics
 - [ ] Personalized recommendations are generated for sleep improvement
 
 ## Completed Work
-- [ ] Initial project setup and documentation
+- [x] Initial project setup and documentation
+- [x] Sensor data collection module implementation
 
 ## Next Steps
-1. Implement sensor data collection module
-2. Develop data analysis algorithms
-3. Create recommendation engine
-4. Design UI/UX for the mobile app
+1. Develop data analysis algorithms
+2. Create recommendation engine
+3. Design UI/UX for the mobile app
+
+## Files
+- `sensor_data_collector.py` - Module for collecting and processing sensor data

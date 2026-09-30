@@ -1,40 +1,62 @@
-"""Module for collecting sensor data from smartphone sensors"""
-
+# Sleep Pattern Analyzer - Sensor Data Collector
 import random
 import time
+from datetime import datetime, timedelta
 
 class SensorDataCollector:
     def __init__(self):
-        self.accelerometer_data = []
-        self.gyroscope_data = []
+        self.data = []
         
-    def get_sensor_data(self):
-        """Simulate getting sensor data from device"""
-        # In a real implementation, this would interface with actual sensors
-        # For now, we simulate data collection
+    def generate_mock_accelerometer_data(self, duration_minutes=60):
+        """Generate mock accelerometer data for sleep tracking"""
+        start_time = datetime.now()
+        data_points = []
         
-        # Simulate accelerometer data (x, y, z)
-        accel_data = [
-            random.uniform(-10.0, 10.0),
-            random.uniform(-10.0, 10.0),
-            random.uniform(-10.0, 10.0)
-        ]
+        # Generate data points every 10 seconds
+        for i in range(0, duration_minutes * 60, 10):
+            timestamp = start_time + timedelta(seconds=i)
+            # Simulate movement data (x, y, z acceleration values)
+            x = random.uniform(-1.0, 1.0)
+            y = random.uniform(-1.0, 1.0)
+            z = random.uniform(-1.0, 1.0)
+            
+            data_points.append({
+                'timestamp': timestamp.isoformat(),
+                'x': x,
+                'y': y,
+                'z': z
+            })
         
-        # Simulate gyroscope data (x, y, z)
-        gyro_data = [
-            random.uniform(-100.0, 100.0),
-            random.uniform(-100.0, 100.0),
-            random.uniform(-100.0, 100.0)
-        ]
+        return data_points
+    
+    def get_sleep_periods(self, data):
+        """Identify sleep periods from accelerometer data"""
+        sleep_periods = []
         
-        return {
-            'accel': accel_data,
-            'gyro': gyro_data,
-            'timestamp': time.time()
-        }
-
-# Create global instance
-sensor_collector = SensorDataCollector()
-
-def get_sensor_data():
-    return sensor_collector.get_sensor_data()
+        # Simple algorithm: detect periods with low movement activity
+        threshold = 0.1  # Movement threshold
+        
+        # Check consecutive points for low movement
+        i = 0
+        while i < len(data) - 1:
+            current_point = data[i]
+            next_point = data[i + 1]
+            
+            # Calculate movement magnitude
+            current_movement = abs(current_point['x']) + abs(current_point['y']) + abs(current_point['z'])
+            next_movement = abs(next_point['x']) + abs(next_point['y']) + abs(next_point['z'])
+            
+            # If both points show low movement, consider it a sleep period
+            if current_movement < threshold and next_movement < threshold:
+                sleep_periods.append({
+                    'start': current_point['timestamp'],
+                    'end': next_point['timestamp'],
+                    'duration_minutes': 10/60  # 10 seconds in minutes
+                })
+                
+                # Skip ahead to avoid overlapping periods
+                i += 2
+            else:
+                i += 1
+        
+        return sleep_periods
