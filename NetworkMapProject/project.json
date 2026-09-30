@@ -1,15 +1,7 @@
 {
-  "goal": "Develop a network scanning tool that can discover devices on a network, identify open ports, and generate a report.",
-  "acceptance_criteria": [
-    "The script must support scanning IP ranges using CIDR notation",
-    "The script must support specifying multiple ports to scan",
-    "The script must handle socket timeouts appropriately",
-    "The script must provide detailed logging for debugging",
-    "The script must output results in JSON format",
-    "All functions must be properly exported and accessible",
-    "Comprehensive test suite passes with proper socket handling and DNS resolution"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 14,
-  "status": "complete"
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 15
 }
