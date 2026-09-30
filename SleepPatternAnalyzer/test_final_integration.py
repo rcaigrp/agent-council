@@ -1,41 +1,44 @@
-#!/usr/bin/env python3
+# Final integration test for Sleep Pattern Analyzer
 import sys
 import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from analysis import SleepAnalyzer
-from recommendations import RecommendationEngine
-from ui_components import SleepUI
+current_dir = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, current_dir)
 
-# Test final integration
+# Test all components work together
 def test_complete_workflow():
+    from analysis import SleepAnalyzer
+    from recommendations import RecommendationEngine
+    from ui_components import SleepDataDisplay
+    
     # Create sample data
     sample_data = {
-        'accelerometer': [1, 2, 3, 4, 5],
-        'gyroscope': [0.1, 0.2, 0.3, 0.4, 0.5]
+        'accelerometer': [0.1, 0.2, 0.3],
+        'gyroscope': [0.05, 0.1, 0.15]
     }
     
     # Test analysis
     analyzer = SleepAnalyzer()
-    result = analyzer.analyze_sleep_data(sample_data)
-    print(f'Sleep Analysis Result: {result}')
+    metrics = analyzer.analyze_sleep_data(sample_data)
+    print(f'Analysis complete: {metrics}')
     
     # Test recommendations
     engine = RecommendationEngine()
-    recommendations = engine.generate_recommendations(result)
-    print(f'Recommendations: {recommendations}')
+    recommendations = engine.generate_recommendations(metrics)
+    print(f'Recommendations generated: {recommendations}')
     
-    # Test UI
-    ui = SleepUI()
-    ui_result = ui.show_sleep_analysis(result)
-    print(ui_result)
+    # Test UI display
+    ui = SleepDataDisplay()
+    display_result = ui.display_sleep_metrics(metrics)
+    print(f'UI Display test: {display_result}')
     
+    print('All components working correctly!')
     return True
 
 if __name__ == '__main__':
     try:
         test_complete_workflow()
-        print('SUCCESS: All components integrated correctly')
+        print('SUCCESS: All tests passed')
     except Exception as e:
-        print(f'ERROR: {e}')
+        print(f'FAILED: {str(e)}')
         sys.exit(1)

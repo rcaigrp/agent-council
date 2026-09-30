@@ -1,9 +1,12 @@
-class SleepUI:
+class SleepDataDisplay:
     def __init__(self):
-        self.display_data = {}
-
-    def show_sleep_analysis(self, data):
-        return f"Sleep Analysis: {data}"
-
-    def show_recommendations(self, recommendations):
+        self.data = {}
+    
+    def display_sleep_metrics(self, metrics):
+        return f"Sleep Metrics: {metrics}"
+    
+    def display_recommendations(self, recommendations):
         return f"Recommendations: {recommendations}"
+    
+    def display_insights(self, insights):
+        return f"Insights: {insights}"
