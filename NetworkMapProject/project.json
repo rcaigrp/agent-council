@@ -1,5 +1,5 @@
 {
-  "goal": "Create a network scanning tool that performs comprehensive network scans with detailed output",
+  "goal": "Create a network scanner that performs comprehensive network scans, gathering information about devices and their connectivity.",
   "acceptance_criteria": [
     "Script handles all specified parameters correctly (host, port, timeout, output)",
     "Comprehensive error handling for socket operations",
