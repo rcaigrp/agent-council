@@ -10,7 +10,7 @@ Create a mobile application that:
 - Displays sleep analytics and insights in an intuitive user interface
 
 ## Acceptance Criteria
-- [ ] Application can collect sleep data from smartphone sensors
+- [x] Application can collect sleep data from smartphone sensors
 - [ ] Sleep data is analyzed to identify patterns and quality metrics
 - [ ] Personalized recommendations are generated for sleep improvement
 - [ ] User interface displays sleep analytics and insights
@@ -20,8 +20,7 @@ Create a mobile application that:
 Active - Initial project setup complete
 
 ## Next Steps
-1. Set up mobile app framework
-2. Implement sensor data collection
-3. Develop sleep analysis algorithms
-4. Create recommendation engine
-5. Design user interface
+1. Implement sensor data collection
+2. Develop sleep analysis algorithms
+3. Create recommendation engine
+4. Design user interface

@@ -1,1 +1,0 @@
-# Fix test script to properly execute tests for the to-do list API.
