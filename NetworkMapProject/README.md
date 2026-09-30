@@ -15,9 +15,11 @@ This script performs a comprehensive network scan, gathering information about d
 python network_scanner.py --host 192.168.1.0/24 --port 22 80 443 --timeout 1
 ```
 
-## Troubleshooting
+To run tests:
 
-[Link to Network Scanner Library Documentation]
+```bash
+python -m pytest test_scanner.py
+```
 
 ## Features
 
@@ -27,15 +29,8 @@ python network_scanner.py --host 192.168.1.0/24 --port 22 80 443 --timeout 1
 - Support for CIDR notation in host specification
 - JSON output format for easy parsing
 
-## Testing
+## Troubleshooting
 
-To run tests:
+If you see ResourceWarnings about unclosed sockets, ensure your Python version is 3.6+ and the code properly handles socket cleanup.
 
-```bash
-python -m pytest test_scanner.py
-```
-
-## Requirements
-
-- Python 3.6+
-- No external dependencies required
+[Link to Network Scanner Library Documentation]
