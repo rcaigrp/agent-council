@@ -1,1 +1,7 @@
-{"goal": "Create a network scanning tool that identifies active hosts and open ports within a given network range.", "acceptance_criteria": ["The tool must scan a specified IP range or hostname", "It should detect open ports on discovered hosts", "The output must be in JSON format with detailed information about each host and its open ports", "Input validation must be implemented for host addresses and port ranges", "Error handling must cover socket operations and DNS resolution", "Comprehensive test suite must pass with proper socket handling and DNS resolution"], "meeting_budget": 10, "meetings_held": 26, "status": "complete"}
+{
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 27
+}
