@@ -1,29 +1,41 @@
+#!/usr/bin/env python3
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from analysis import SleepAnalyzer
 from recommendations import RecommendationEngine
-from ui_components import SleepDisplay
+from ui_components import SleepUI
 
-# Test that all modules can be imported correctly
-try:
+# Test final integration
+def test_complete_workflow():
+    # Create sample data
+    sample_data = {
+        'accelerometer': [1, 2, 3, 4, 5],
+        'gyroscope': [0.1, 0.2, 0.3, 0.4, 0.5]
+    }
+    
+    # Test analysis
     analyzer = SleepAnalyzer()
+    result = analyzer.analyze_sleep_data(sample_data)
+    print(f'Sleep Analysis Result: {result}')
+    
+    # Test recommendations
     engine = RecommendationEngine()
-    display = SleepDisplay()
-    print('SUCCESS: All modules imported and instantiated correctly')
-    
-    # Test basic functionality
-    test_data = [{'timestamp': 0, 'x': 1.0, 'y': 2.0, 'z': 3.0}]
-    result = analyzer.analyze_sleep_pattern(test_data)
-    print(f'SUCCESS: Analysis completed with {len(result)} results')
-    
     recommendations = engine.generate_recommendations(result)
-    print(f'SUCCESS: Generated {len(recommendations)} recommendations')
+    print(f'Recommendations: {recommendations}')
     
-    display.show_analytics(result, recommendations)
-    print('SUCCESS: All components work together correctly')
+    # Test UI
+    ui = SleepUI()
+    ui_result = ui.show_sleep_analysis(result)
+    print(ui_result)
     
-except Exception as e:
-    print(f'ERROR: {e}')
-    sys.exit(1)
+    return True
+
+if __name__ == '__main__':
+    try:
+        test_complete_workflow()
+        print('SUCCESS: All components integrated correctly')
+    except Exception as e:
+        print(f'ERROR: {e}')
+        sys.exit(1)

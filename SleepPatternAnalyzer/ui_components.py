@@ -1,10 +1,9 @@
-class SleepDisplay:
+class SleepUI:
     def __init__(self):
-        self.data = None
-        
-    def render_dashboard(self, sleep_data):
-        # Mock implementation for UI display
-        return f"Sleep Dashboard: {len(sleep_data)} data points"
-        
-    def show_insights(self, insights):
-        return f"Insights: {insights}"
+        self.display_data = {}
+
+    def show_sleep_analysis(self, data):
+        return f"Sleep Analysis: {data}"
+
+    def show_recommendations(self, recommendations):
+        return f"Recommendations: {recommendations}"
