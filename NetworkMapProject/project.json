@@ -1,1 +1,7 @@
-{"goal": "Create a network scanning tool that identifies devices and their connectivity status", "acceptance_criteria": ["Scans IP ranges and ports efficiently", "Provides detailed output in JSON format", "Includes proper error handling and logging", "Supports CIDR notation for host specifications"], "meeting_budget": 10, "meetings_held": 36, "status": "complete"}
+{
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 37
+}
