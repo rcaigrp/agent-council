@@ -1,14 +1,7 @@
 {
-  "goal": "Create a network scanning tool that can scan ports, resolve hosts, and generate network topology maps.",
-  "acceptance_criteria": [
-    "The tool must be able to scan ports on specified hosts",
-    "The tool must resolve hostnames to IP addresses",
-    "The tool must support CIDR notation in host specification",
-    "The tool must output results in JSON format",
-    "All socket operations must handle errors gracefully",
-    "The tool must have comprehensive test coverage"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 19,
-  "status": "complete"
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 20
 }
