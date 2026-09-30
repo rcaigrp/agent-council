@@ -1,47 +1,50 @@
 # Network Scanner Module
 import socket
+import sys
 import logging
-from typing import List, Tuple, Optional
+from typing import List, Dict, Optional
 
-class NetworkScanner:
-    def __init__(self, timeout: int = 1):
-        self.timeout = timeout
-        self.logger = logging.getLogger(__name__)
+def scan_port(host: str, port: int, timeout: float) -> bool:
+    """
+    Scan a single port on a host.
+    Returns True if the port is open, False otherwise.
+    """
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(timeout)
+        result = sock.connect_ex((host, port))
+        sock.close()
+        return result == 0
+    except Exception as e:
+        logging.error(f"Error scanning port {port} on {host}: {e}")
+        return False
 
-    def scan_port(self, host: str, port: int) -> bool:
-        """
-        Scan a single port on a given host.
-        Returns True if the port is open, False otherwise.
-        """
-        try:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.settimeout(self.timeout)
-            result = sock.connect_ex((host, port))
-            sock.close()  # Ensure socket is closed
-            return result == 0
-        except socket.gaierror:
-            self.logger.error(f'DNS resolution failed for {host}')
-            return False  # Return False instead of re-raising
-        except Exception as e:
-            self.logger.error(f'Unexpected error scanning {host}:{port} - {e}')
-            return False
+def resolve_host(hostname: str) -> Optional[str]:
+    """
+    Resolve a hostname to an IP address.
+    Returns the IP address or None if resolution fails.
+    """
+    try:
+        result = socket.getaddrinfo(hostname, None)
+        return result[0][4][0]
+    except socket.gaierror as e:
+        logging.error(f"DNS resolution failed for {hostname}: {e}")
+        raise
 
-    def scan_host(self, host: str, ports: List[int]) -> dict:
-        """
-        Scan multiple ports on a single host.
-        Returns a dictionary mapping port numbers to boolean results.
-        """
-        results = {}
+def scan_host(hostname: str, ports: List[int], timeout: float) -> Dict[str, Dict[str, List[int]]]:
+    """
+    Scan multiple ports on a host.
+    Returns a dictionary with hostname as key and IP address as key in nested dict with open ports list.
+    """
+    try:
+        ip_address = resolve_host(hostname)
+        open_ports = []
         for port in ports:
-            results[port] = self.scan_port(host, port)
-        return results
-
-    def scan_network(self, hosts: List[str], ports: List[int]) -> dict:
-        """
-        Scan multiple ports on multiple hosts.
-        Returns a nested dictionary with host keys and port mappings.
-        """
-        results = {}
-        for host in hosts:
-            results[host] = self.scan_host(host, ports)
-        return results
+            if scan_port(ip_address, port, timeout):
+                open_ports.append(port)
+        return {hostname: {ip_address: open_ports}}
+    except socket.gaierror:
+        return {hostname: {}}
+    except Exception as e:
+        logging.error(f"Error scanning host {hostname}: {e}")
+        return {hostname: {}}
