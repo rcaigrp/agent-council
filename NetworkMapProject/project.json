@@ -1,7 +1,1 @@
-{
-  "name": "To-Do API for Network Map",
-  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
-  "version": "1.0",
-  "author": "AI Assistant",
-  "meetings_held": 23
-}
+{"goal": "Create a network scanning tool that identifies devices and their connectivity within a network", "acceptance_criteria": ["Tool scans ports on specified hosts", "Handles CIDR notation for host ranges", "Provides JSON output format", "Includes proper error handling for socket operations", "Supports timeout configuration", "Validates input parameters", "Comprehensive test suite passes"], "meeting_budget": 10, "meetings_held": 23, "status": "complete"}
