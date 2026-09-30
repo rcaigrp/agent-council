@@ -1,1 +1,15 @@
-{"goal": "Create a network scanning tool that performs comprehensive network scans, gathering information about devices and their connectivity.", "acceptance_criteria": ["Script handles all specified parameters correctly (host, port, timeout, output)", "Comprehensive test suite passes with proper socket handling and DNS resolution", "All network scanning functions are properly exported and accessible from module level", "Published to GitHub: https://github.com/rcaigrp/agent-council"], "meeting_budget": 10, "meetings_held": 11, "status": "complete"}
+{
+  "goal": "Create a network scanning tool that can scan ports, resolve hosts, and output results in JSON format.",
+  "acceptance_criteria": [
+    "Script handles all specified parameters correctly (host, port, timeout, output)",
+    "Comprehensive error handling for socket operations",
+    "Detailed logging for debugging and progress tracking",
+    "Input validation for ports and hosts",
+    "Support for CIDR notation in host specification",
+    "JSON output format for easy parsing",
+    "All tests pass with proper socket handling and DNS resolution"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 11,
+  "status": "complete"
+}
