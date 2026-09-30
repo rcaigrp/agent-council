@@ -1,18 +1,42 @@
+import pandas as pd
 class RecommendationEngine:
     def __init__(self):
-        pass
+        self.recommendations = {
+            'sleep_duration': [
+                'Try to maintain consistent sleep schedule (7-9 hours for adults)',
+                'Avoid long daytime naps that interfere with nighttime sleep'
+            ],
+            'restlessness': [
+                'Create a calming bedtime routine to reduce mental stimulation',
+                'Keep bedroom cool and well-ventilated'
+            ],
+            'sleep_quality': [
+                'Limit screen time 1 hour before bed',
+                'Avoid caffeine after 2 PM'
+            ]
+        }
     
-    def generate_recommendations(self, analysis_result):
+    def generate_recommendations(self, sleep_data):
         recommendations = []
         
-        if analysis_result['sleep_quality_score'] < 60:
-            recommendations.append("Your sleep quality is low. Try to maintain a consistent sleep schedule.")
-            recommendations.append("Reduce screen time before bed to improve sleep quality.")
+        # Analyze sleep duration
+        if 'duration' in sleep_data:
+            duration = sleep_data['duration']
+            if duration < 6:
+                recommendations.extend(self.recommendations['sleep_duration'])
+            elif duration > 10:
+                recommendations.append('Consider reducing nighttime sleep to avoid grogginess')
         
-        if analysis_result['avg_heart_rate'] > 70:
-            recommendations.append("Consider relaxation techniques to lower your resting heart rate.")
+        # Analyze restlessness
+        if 'restlessness_index' in sleep_data:
+            restlessness = sleep_data['restlessness_index']
+            if restlessness > 0.7:
+                recommendations.extend(self.recommendations['restlessness'])
         
-        if analysis_result['total_movement'] > 200:
-            recommendations.append("Excessive movement during sleep may indicate restlessness. Try a comfortable sleeping position.")
+        # Analyze overall quality
+        if 'quality_score' in sleep_data:
+            quality = sleep_data['quality_score']
+            if quality < 60:
+                recommendations.extend(self.recommendations['sleep_quality'])
         
-        return recommendations
+        return list(set(recommendations))  # Remove duplicates
