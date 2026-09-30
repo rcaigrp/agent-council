@@ -1,7 +1,17 @@
 {
-  "name": "To-Do API for Network Map",
-  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
-  "version": "1.0",
-  "author": "AI Assistant",
-  "meetings_held": 28
+  "goal": "Create a network scanning tool that can discover devices and their open ports",
+  "acceptance_criteria": [
+    "Implement scan_port function to check if a port is open on a given host",
+    "Implement resolve_host function to resolve IP addresses from hostnames",
+    "Implement scan_network function to scan a range of hosts for open ports",
+    "Support CIDR notation in host specification",
+    "Handle socket cleanup properly to avoid ResourceWarnings",
+    "Proper input validation for ports and hosts",
+    "JSON output format for easy parsing",
+    "Comprehensive error handling for socket operations",
+    "Detailed logging for debugging and progress tracking"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 28,
+  "status": "complete"
 }
