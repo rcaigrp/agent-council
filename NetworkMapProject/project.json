@@ -1,1 +1,13 @@
-{"goal": "Create a network scanning tool that identifies devices and their connectivity within a network", "acceptance_criteria": ["The tool must scan ports on specified hosts", "It must support CIDR notation for host ranges", "Output must be in JSON format", "All socket operations must handle errors gracefully", "The tool must validate input parameters correctly"], "meeting_budget": 10, "meetings_held": 19, "status": "complete"}
+{
+  "goal": "Create a network scanning tool that can identify active hosts and open ports within a given network range",
+  "acceptance_criteria": [
+    "The tool must accept IP ranges in CIDR notation",
+    "It must scan specified port ranges efficiently",
+    "Results must be output in JSON format",
+    "Proper error handling for socket operations and DNS resolution",
+    "Comprehensive test coverage with pytest"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 19,
+  "status": "complete"
+}
