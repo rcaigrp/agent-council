@@ -1,5 +1,5 @@
 {
-  "goal": "Create a network scanning tool that can scan ports, resolve hosts, and output results in JSON format.",
+  "goal": "Create a network scanning tool that performs comprehensive network scans with detailed output",
   "acceptance_criteria": [
     "Script handles all specified parameters correctly (host, port, timeout, output)",
     "Comprehensive error handling for socket operations",
