@@ -1,1 +1,13 @@
-{"goal": "Develop a network scanning tool that can identify active hosts and open ports across a network range", "acceptance_criteria": ["Tool accepts IP ranges, port ranges, and timeout values as arguments", "Tool outputs results in JSON format", "All socket operations are properly handled with error checking", "DNS resolution works for hostnames", "CIDR notation is supported for host specifications"], "meeting_budget": 10, "meetings_held": 14, "status": "complete"}
+{
+  "goal": "Create a network scanning tool that can identify devices and their open ports on a network",
+  "acceptance_criteria": [
+    "The tool must scan networks using CIDR notation",
+    "It must support port scanning across specified ranges",
+    "Results should be output in JSON format",
+    "Comprehensive error handling for socket operations",
+    "Proper logging and debugging capabilities"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 14,
+  "status": "complete"
+}
