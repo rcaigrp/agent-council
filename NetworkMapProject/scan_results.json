@@ -1,1 +1,11 @@
-{ "scan_results": ["Host 1 - Up", "Host 2 - Down", "Host 3 - Up"] }
+[
+  {
+    "host": "127.0.0.1",
+    "status": "up",
+    "open_ports": [
+      22,
+      80,
+      443
+    ]
+  }
+]
