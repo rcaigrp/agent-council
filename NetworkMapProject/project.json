@@ -1,13 +1,12 @@
 {
-  "goal": "Create a network scanning tool that identifies devices and their connectivity on a network",
+  "goal": "Create a network scanning tool that performs comprehensive scans of devices and their connectivity",
   "acceptance_criteria": [
-    "Script performs comprehensive network scan with CIDR support",
-    "Supports port scanning with customizable timeout",
-    "Includes proper error handling for socket operations",
-    "Provides detailed logging for debugging",
-    "Input validation for ports and hosts",
-    "JSON output format for easy parsing",
-    "All tests pass successfully"
+    "Script must support CIDR notation in host specification",
+    "Script must validate input ports and hosts",
+    "Script must handle socket operations with proper error handling",
+    "Script must log debugging information and progress tracking",
+    "Script must output results in JSON format for easy parsing",
+    "All tests must pass successfully with no ResourceWarnings about unclosed sockets"
   ],
   "meeting_budget": 10,
   "meetings_held": 22,
