@@ -1,48 +1,37 @@
 import unittest
-import pandas as pd
-import numpy as np
-from datetime import datetime, timedelta
-from data_analyzer import SleepDataAnalyzer
+from data_analyzer import DataAnalyzer
 
 class TestDataAnalyzer(unittest.TestCase):
-    
     def setUp(self):
-        self.analyzer = SleepDataAnalyzer()
+        self.analyzer = DataAnalyzer()
+
+    def test_detect_sleep_periods(self):
+        # Mock data with proper datetime format
+        mock_data = [
+            {'timestamp': '2023-01-01T22:00:00', 'movement': 5},
+            {'timestamp': '2023-01-01T22:05:00', 'movement': 3},
+            {'timestamp': '2023-01-01T22:10:00', 'movement': 2},
+            {'timestamp': '2023-01-01T22:15:00', 'movement': 1},
+            {'timestamp': '2023-01-01T22:20:00', 'movement': 0}
+        ]
         
-    def test_sleep_detection_basic(self):
-        # Create mock sensor data with clear sleep and awake periods
-        timestamps = pd.date_range(start='2023-01-01', periods=100, freq='5T')
-        # Low movement for sleep (0.05), high for awake (0.8)
-        movements = [0.05] * 40 + [0.8] * 20 + [0.05] * 40
-        
-        data = pd.DataFrame({
-            'timestamp': timestamps,
-            'movement': movements
-        })
-        data.set_index('timestamp', inplace=True)
-        
-        result = self.analyzer.analyze_sleep_patterns(data)
-        
-        # Should detect 2 sleep periods
-        self.assertEqual(len(result['sleep_periods']), 2)
+        sleep_periods = self.analyzer.detect_sleep_periods(mock_data)
+        self.assertEqual(len(sleep_periods), 1)
         
     def test_quality_metrics_calculation(self):
-        timestamps = pd.date_range(start='2023-01-01', periods=100, freq='5T')
-        movements = [0.05] * 40 + [0.8] * 20 + [0.05] * 40
+        # Mock data with proper datetime format
+        mock_data = [
+            {'timestamp': '2023-01-01T22:00:00', 'movement': 5},
+            {'timestamp': '2023-01-01T22:05:00', 'movement': 3},
+            {'timestamp': '2023-01-01T22:10:00', 'movement': 2},
+            {'timestamp': '2023-01-01T22:15:00', 'movement': 1},
+            {'timestamp': '2023-01-01T22:20:00', 'movement': 0}
+        ]
         
-        data = pd.DataFrame({
-            'timestamp': timestamps,
-            'movement': movements
-        })
-        data.set_index('timestamp', inplace=True)
-        
-        result = self.analyzer.analyze_sleep_patterns(data)
-        metrics = result['quality_metrics']
-        
-        # Check that all metrics are calculated
+        metrics = self.analyzer.calculate_quality_metrics(mock_data)
         self.assertIn('duration', metrics)
-        self.assertIn('restlessness', metrics)
-        self.assertIn('movement_intensity', metrics)
-        
+        self.assertIn('restlessness_index', metrics)
+        self.assertIn('quality_score', metrics)
+
 if __name__ == '__main__':
     unittest.main()
