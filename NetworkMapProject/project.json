@@ -1,14 +1,7 @@
 {
-  "goal": "Create a network scanning tool that identifies devices and their connectivity",
-  "acceptance_criteria": [
-    "Script scans ports on specified hosts",
-    "Supports CIDR notation for host ranges",
-    "Provides JSON output format",
-    "Includes comprehensive error handling",
-    "Has detailed logging capabilities",
-    "Input validation for ports and hosts"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 24,
-  "status": "complete"
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 25
 }
