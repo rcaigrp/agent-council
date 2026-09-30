@@ -8,6 +8,7 @@
     "Application provides actionable tips based on sleep analysis"
   ],
   "meeting_budget": 5,
-  "meetings_held": 8,
-  "status": "complete"
+  "meetings_held": 9,
+  "status": "parked",
+  "park_reason": "Auto-parked: exceeded meeting budget by 4 meetings."
 }
