@@ -1,14 +1,12 @@
 {
-  "goal": "Create a network scanning tool that can discover devices and their open ports",
+  "goal": "Create a network scanning tool that identifies devices and their connectivity",
   "acceptance_criteria": [
-    "The script must accept IP addresses or hostnames as input",
-    "Support for CIDR notation in host specification",
-    "Ability to scan specific port ranges",
-    "Proper error handling for socket operations",
-    "Detailed logging for debugging and progress tracking",
-    "Input validation for ports and hosts",
-    "JSON output format for easy parsing",
-    "Comprehensive test suite with proper socket handling"
+    "Script scans ports on specified hosts",
+    "Supports CIDR notation for host ranges",
+    "Provides JSON output format",
+    "Includes proper error handling for socket operations",
+    "Validates input parameters for ports and hosts",
+    "Logs debugging and progress information"
   ],
   "meeting_budget": 10,
   "meetings_held": 15,
