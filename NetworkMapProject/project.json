@@ -1,14 +1,7 @@
 {
-  "goal": "Create a comprehensive network scanner that can scan ports, resolve hosts, and output results in JSON format.",
-  "acceptance_criteria": [
-    "Scan ports on specified hosts",
-    "Resolve hostnames to IP addresses",
-    "Support CIDR notation for network ranges",
-    "Output results in JSON format",
-    "Handle timeouts and errors gracefully",
-    "Validate input parameters"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 28,
-  "status": "complete"
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 29
 }
