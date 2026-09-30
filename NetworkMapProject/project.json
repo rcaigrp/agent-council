@@ -1,7 +1,1 @@
-{
-  "name": "To-Do API for Network Map",
-  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
-  "version": "1.0",
-  "author": "AI Assistant",
-  "meetings_held": 11
-}
+{"goal": "Create a network scanning tool that can scan ports, resolve hosts, and output results in JSON format", "acceptance_criteria": ["Script handles all specified parameters correctly (host, port, timeout, output)", "Comprehensive test suite passes with proper socket handling and DNS resolution", "All network scanning functions are properly exported and accessible from module level", "Published to GitHub repository https://github.com/rcaigrp/agent-council"], "meeting_budget": 10, "meetings_held": 11, "status": "complete"}
