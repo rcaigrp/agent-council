@@ -1,39 +1,36 @@
-"""
-Recommendation Engine Module
-
-Generates personalized recommendations for sleep improvement.
-"""
+import json
 
 class RecommendationEngine:
-    """Generates personalized sleep recommendations based on analysis."""
-    
     def __init__(self):
-        self.recommendations = []
-        
-    def generate_recommendations(self, analysis_results):
-        """Generate recommendations based on sleep analysis results."""
-        # This is a placeholder for the actual recommendation logic
-        # In a real implementation, this would use the analysis results to provide
-        # personalized tips and advice
-        
+        # Load recommendation rules
+        self.rules = {
+            'duration': {
+                '<6': 'Sleep for at least 6 hours to improve recovery',
+                '>=6': 'Good sleep duration'
+            },
+            'movement': {
+                '>2.0': 'Reduce screen time before bed to minimize movement',
+                '<=2.0': 'Your movement patterns are healthy'
+            }
+        }
+    
+    def get_recommendations(self, metrics):
         recommendations = []
         
-        if analysis_results.get('sleep_quality_score', 0) < 5:
-            recommendations.append("Your sleep quality could be improved. Try maintaining a consistent bedtime routine.")
-            recommendations.append("Consider limiting screen time before bed to improve sleep onset latency.")
-            
-        if analysis_results.get('deep_sleep_percentage', 0) < 15:
-            recommendations.append("You may not be getting enough deep sleep. Try reducing caffeine intake in the afternoon.")
-            
-        if analysis_results.get('rem_sleep_percentage', 0) < 10:
-            recommendations.append("REM sleep is important for memory consolidation. Ensure you're getting adequate sleep duration.")
-            
-        recommendations.append("Keep a sleep diary to track your progress over time.")
-        recommendations.append("Try relaxation techniques like deep breathing or meditation before bedtime.")
+        # Duration recommendation
+        if metrics['sleep_duration'] < 6:
+            recommendations.append(self.rules['duration']['<6'])
+        else:
+            recommendations.append(self.rules['duration']['>=6'])
         
-        self.recommendations = recommendations
+        # Movement recommendation
+        if metrics['movement_score'] > 2.0:
+            recommendations.append(self.rules['movement']['>2.0'])
+        else:
+            recommendations.append(self.rules['movement']['<=2.0'])
+        
         return recommendations
-        
-    def get_recommendations(self):
-        """Return generated recommendations."""
-        return self.recommendations
+    
+    def save_recommendations(self, recommendations, filename='recommendations.json'):
+        with open(filename, 'w') as f:
+            json.dump(recommendations, f)
