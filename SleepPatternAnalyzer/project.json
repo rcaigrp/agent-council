@@ -1,1 +1,13 @@
-{"goal": "Create a mobile application that tracks sleep patterns using smartphone sensors and provides personalized recommendations for improving sleep quality based on data analysis.", "acceptance_criteria": ["Application can collect sleep data from smartphone sensors", "Sleep data is analyzed to identify patterns and quality metrics", "Personalized recommendations are generated for sleep improvement", "User interface displays sleep analytics and insights", "Application provides actionable tips based on sleep analysis"], "meeting_budget": 5, "meetings_held": 6, "status": "complete"}
+{
+  "goal": "Create a mobile application that tracks sleep patterns using smartphone sensors and provides personalized recommendations for improving sleep quality based on data analysis.",
+  "acceptance_criteria": [
+    "Application can collect sleep data from smartphone sensors",
+    "Sleep data is analyzed to identify patterns and quality metrics",
+    "Personalized recommendations are generated for sleep improvement",
+    "User interface displays sleep analytics and insights",
+    "Application provides actionable tips based on sleep analysis"
+  ],
+  "meeting_budget": 5,
+  "meetings_held": 6,
+  "status": "complete"
+}
