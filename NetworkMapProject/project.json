@@ -1,12 +1,11 @@
 {
-  "goal": "Create a network scanning tool that performs comprehensive network scans, gathers device information, and outputs results in JSON format.",
+  "goal": "Create a network scanning tool that can identify active hosts and open ports on a network",
   "acceptance_criteria": [
-    "The script accepts --host, --port, --timeout, and --output parameters",
-    "Proper socket handling with error management for network operations",
-    "Support for CIDR notation in host specification",
-    "Input validation for ports and hosts",
-    "JSON output format for easy parsing",
-    "Comprehensive test suite passes with proper socket handling and DNS resolution"
+    "Script accepts --host, --port, --timeout, and --output parameters",
+    "Supports CIDR notation for host specification",
+    "Proper socket handling with timeout and error management",
+    "JSON output format for scan results",
+    "Comprehensive test suite passes"
   ],
   "meeting_budget": 10,
   "meetings_held": 13,
