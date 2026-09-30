@@ -1,1 +1,13 @@
-{"goal": "Create a network scanning tool that can discover devices and their open ports on a network", "acceptance_criteria": ["Script scans network ranges", "Supports CIDR notation", "Validates ports and hosts", "Outputs results in JSON format", "Handles socket operations safely", "Includes comprehensive logging"], "meeting_budget": 10, "meetings_held": 16, "status": "complete"}
+{
+  "goal": "Create a network scanning tool that can discover devices and their open ports on a network",
+  "acceptance_criteria": [
+    "The tool must support CIDR notation for host specification",
+    "The tool must handle socket operations with proper error handling",
+    "The tool must validate input for ports and hosts",
+    "The tool must output results in JSON format",
+    "All tests must pass successfully with no resource warnings about unclosed sockets"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 16,
+  "status": "complete"
+}
