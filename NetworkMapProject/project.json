@@ -1,13 +1,12 @@
 {
-  "goal": "Create a network scanning tool that identifies devices and their open ports within a given network range.",
+  "goal": "Create a network scanning tool that can identify active hosts and open ports across a network",
   "acceptance_criteria": [
-    "The tool must scan a specified IP range or hostname",
-    "It should support port scanning for a list of ports",
-    "Error handling for socket operations must be implemented",
-    "Input validation for ports and hosts is required",
-    "Support for CIDR notation in host specification is included",
-    "JSON output format is supported for easy parsing",
-    "All functions are properly exported and accessible"
+    "The tool must support CIDR notation for host specification",
+    "It should scan multiple ports simultaneously with configurable timeout",
+    "Results are output in JSON format for easy parsing",
+    "Comprehensive error handling for socket operations and DNS resolution",
+    "All functions are properly exported and accessible from the module",
+    "Test suite passes with proper socket cleanup and DNS resolution tests"
   ],
   "meeting_budget": 10,
   "meetings_held": 19,
