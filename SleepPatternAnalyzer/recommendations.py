@@ -1,19 +1,30 @@
 import pandas as pd
 class RecommendationEngine:
     def __init__(self):
-        self.tips = {
-            'deep_sleep_deficit': 'Try to maintain 7-9 hours of sleep nightly to improve deep sleep duration.',
-            'light_sleep_excess': 'Reduce screen time before bed and keep bedroom cool for better sleep quality.',
-            'wake_time_consistency': 'Set a consistent bedtime and wake-up time, even on weekends.',
-            'sleep_latency': 'Avoid caffeine after 2 PM and establish a relaxing pre-sleep routine.'
+        self.recommendations = {
+            'sleep_duration': [
+                'Try to maintain consistent sleep schedule with 7-9 hours nightly',
+                'Avoid long daytime naps that may disrupt nighttime sleep'
+            ],
+            'sleep_quality': [
+                'Keep bedroom cool (65-68°F) for optimal sleep temperature',
+                'Limit screen time 1 hour before bedtime'
+            ]
         }
     
     def generate_recommendations(self, sleep_data):
+        # Calculate sleep efficiency
+        total_sleep = sleep_data['total_sleep_minutes'].iloc[0] if not sleep_data.empty else 0
+        sleep_efficiency = sleep_data['sleep_efficiency'].iloc[0] if not sleep_data.empty else 0
+        
         recommendations = []
-        if sleep_data['deep_sleep_percentage'] < 15:
-            recommendations.append(self.tips['deep_sleep_deficit'])
-        if sleep_data['light_sleep_percentage'] > 40:
-            recommendations.append(self.tips['light_sleep_excess'])
-        if sleep_data['sleep_latency'] > 30:
-            recommendations.append(self.tips['sleep_latency'])
+        
+        # Duration-based recommendations
+        if total_sleep < 420:  # Less than 7 hours
+            recommendations.extend(self.recommendations['sleep_duration'])
+        
+        # Quality-based recommendations
+        if sleep_efficiency < 85:
+            recommendations.extend(self.recommendations['sleep_quality'])
+        
         return recommendations
