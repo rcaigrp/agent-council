@@ -1,14 +1,7 @@
 {
-  "goal": "Create a network scanning tool that identifies devices and their connectivity",
-  "acceptance_criteria": [
-    "Script accepts --host, --port, --timeout, and --output arguments",
-    "Supports CIDR notation for host specification",
-    "Proper socket handling with timeout and cleanup",
-    "JSON output format for scan results",
-    "Comprehensive error handling for network operations",
-    "Input validation for ports and hosts"
-  ],
-  "meeting_budget": 10,
-  "meetings_held": 15,
-  "status": "complete"
+  "name": "To-Do API for Network Map",
+  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
+  "version": "1.0",
+  "author": "AI Assistant",
+  "meetings_held": 16
 }
