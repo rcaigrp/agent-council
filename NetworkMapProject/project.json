@@ -1,12 +1,15 @@
 {
-  "goal": "Create a network scanning tool that can scan devices on a network and output information about them in JSON format.",
+  "goal": "Create a network scan script that performs comprehensive network scanning to gather information about devices and their connectivity.",
   "acceptance_criteria": [
-    "The tool must accept IP address or hostname as input",
-    "The tool must support port scanning with timeout functionality",
-    "The tool must output results in JSON format",
-    "The tool must handle CIDR notation for host specification",
-    "The tool must have proper error handling and logging",
-    "All tests must pass successfully"
+    "Script accepts IP address or hostname to scan",
+    "Support for CIDR notation in host specification",
+    "Script supports port range scanning",
+    "Timeout configuration is supported",
+    "JSON output format is implemented",
+    "Comprehensive error handling for socket operations",
+    "Detailed logging for debugging and progress tracking",
+    "Input validation for ports and hosts",
+    "Tests pass successfully with pytest"
   ],
   "meeting_budget": 10,
   "meetings_held": 37,
