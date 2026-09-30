@@ -16,6 +16,7 @@ Complete
 - [x] Sensor data collection module implementation
 - [x] Data analysis algorithms implementation
 - [x] Recommendation engine implementation
+- [x] Unit tests for all modules
 
 ## Next Steps
 None - Project complete!
