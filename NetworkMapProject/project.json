@@ -1,7 +1,1 @@
-{
-  "name": "To-Do API for Network Map",
-  "description": "A simple API for managing tasks, used as a test case for the Network Map project.",
-  "version": "1.0",
-  "author": "AI Assistant",
-  "meetings_held": 20
-}
+{"goal": "Create a network scanning tool that can scan ports, resolve hosts, and generate reports in JSON format.", "acceptance_criteria": ["The tool scans specified IP ranges or hostnames", "The tool supports port ranges and individual ports", "The tool handles DNS resolution properly", "The tool generates detailed JSON output with device information", "The tool has proper error handling for socket operations", "All functions are testable and covered by unit tests"], "meeting_budget": 10, "meetings_held": 10, "status": "complete"}
