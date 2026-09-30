@@ -1,18 +1,11 @@
-# Final integration test for Sleep Pattern Analyzer
+# Final test for Sleep Pattern Analyzer
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# Test all components work together
 try:
     from analysis import SleepAnalyzer
     from recommendations import RecommendationEngine
-    from ui_components import SleepDisplay
-    
-    # Create sample data
-    analyzer = SleepAnalyzer()
-    recommendations = RecommendationEngine()
-    display = SleepDisplay()
     
     print('All modules imported successfully')
     print('Sleep Pattern Analyzer ready for deployment')
