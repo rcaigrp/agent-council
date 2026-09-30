@@ -34,7 +34,3 @@ python -m pytest test_scanner_final.py
 If you see ResourceWarnings about unclosed sockets, ensure your Python version is 3.6+ and the code properly handles socket cleanup.
 
 [Link to Network Scanner Library Documentation]
-
----
-✅ **PROJECT COMPLETE**
-All acceptance criteria have been met and tests pass successfully.
