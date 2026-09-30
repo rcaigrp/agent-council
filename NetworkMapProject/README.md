@@ -36,6 +36,5 @@ If you see ResourceWarnings about unclosed sockets, ensure your Python version i
 [Link to Network Scanner Library Documentation]
 
 ---
-
 ✅ **PROJECT COMPLETE**
 All acceptance criteria have been met and tests pass successfully.
