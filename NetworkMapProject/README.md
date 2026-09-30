@@ -12,9 +12,30 @@ This script performs a comprehensive network scan, gathering information about d
 ## Usage Example
 
 ```bash
-python network_scanner.py --host 192.168.1.0/24 --port 22,80,443 --timeout 1
+python network_scanner.py --host 192.168.1.0/24 --port 22 80 443 --timeout 1
 ```
 
 ## Troubleshooting
 
 [Link to Network Scanner Library Documentation]
+
+## Features
+
+- Comprehensive error handling for socket operations
+- Detailed logging for debugging and progress tracking
+- Input validation for ports and hosts
+- Support for CIDR notation in host specification
+- JSON output format for easy parsing
+
+## Testing
+
+To run tests:
+
+```bash
+python -m pytest test_scanner.py
+```
+
+## Requirements
+
+- Python 3.6+
+- No external dependencies required
