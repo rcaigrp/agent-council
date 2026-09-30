@@ -1,1 +1,17 @@
-{"goal": "Develop a network scanning tool that can discover devices on a network and gather information about their connectivity", "acceptance_criteria": ["Script scans ports on specified hosts", "Handles CIDR notation for host ranges", "Provides JSON output format", "Includes proper error handling for socket operations", "Supports timeout configuration", "Validates input parameters correctly"], "meeting_budget": 10, "meetings_held": 29, "status": "complete"}
+{
+  "goal": "Create a comprehensive network scanner that can identify active devices and open ports on a network",
+  "acceptance_criteria": [
+    "Script must accept IP address or hostname for scanning",
+    "Support for CIDR notation in host specification",
+    "Ability to scan multiple ports at once",
+    "Timeout configuration for socket operations",
+    "JSON output format for results",
+    "Proper error handling for network and socket operations",
+    "Input validation for ports and hosts",
+    "Detailed logging capability",
+    "Comprehensive test suite with pytest"
+  ],
+  "meeting_budget": 10,
+  "meetings_held": 29,
+  "status": "complete"
+}
