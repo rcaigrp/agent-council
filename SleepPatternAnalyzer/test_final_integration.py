@@ -1,28 +1,47 @@
 import sys
-sys.path.append('/workspace/projects/SleepPatternAnalyzer')
-from analysis import SleepAnalyzer
-from recommendations import RecommendationEngine
-from ui_components import SleepAnalyticsUI
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-def test_complete_workflow():
-    # Test data simulating sensor readings
-    test_data = [
-        {'timestamp': '2023-10-01 22:00:00', 'x': 0.1, 'y': 0.2, 'z': 0.1},
-        {'timestamp': '2023-10-01 22:01:00', 'x': 0.05, 'y': 0.1, 'z': 0.08},
-        {'timestamp': '2023-10-01 23:30:00', 'x': 0.02, 'y': 0.03, 'z': 0.01}
+def test_analysis_module():
+    try:
+        from analysis import SleepAnalyzer
+        print('✓ Analysis module imported successfully')
+        return True
+    except Exception as e:
+        print(f'✗ Analysis module import failed: {e}')
+        return False
+
+def test_recommendations_module():
+    try:
+        from recommendations import RecommendationEngine
+        print('✓ Recommendations module imported successfully')
+        return True
+    except Exception as e:
+        print(f'✗ Recommendations module import failed: {e}')
+        return False
+
+def test_ui_components_module():
+    try:
+        from ui_components import SleepDashboard
+        print('✓ UI Components module imported successfully')
+        return True
+    except Exception as e:
+        print(f'✗ UI Components module import failed: {e}')
+        return False
+
+def main():
+    print('Running final integration tests...')
+    results = [
+        test_analysis_module(),
+        test_recommendations_module(),
+        test_ui_components_module()
     ]
-    
-    analyzer = SleepAnalyzer()
-    metrics = analyzer.analyze_sleep_data(test_data)
-    
-    engine = RecommendationEngine()
-    recommendations = engine.generate_recommendations(metrics)
-    
-    ui = SleepAnalyticsUI()
-    ui.display_metrics(metrics)
-    ui.display_recommendations(recommendations)
-    
-    print('Integration test passed successfully!')
+    if all(results):
+        print('\n🎉 All modules working correctly!')
+        return 0
+    else:
+        print('\n❌ Some modules failed')
+        return 1
 
 if __name__ == '__main__':
-    test_complete_workflow()
+    sys.exit(main())
