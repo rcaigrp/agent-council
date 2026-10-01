@@ -9,7 +9,7 @@ Active
 ## Acceptance Criteria
 - [x] Application can collect data on user's daily waste items
 - [x] Waste data is categorized and analyzed for patterns
-- [ ] Personalized recommendations are generated to reduce waste
+- [x] Personalized recommendations are generated to reduce waste
 - [ ] Users can set and track sustainability goals
 
 ## Project Structure
@@ -21,4 +21,4 @@ Active
 - Waste data collection is implemented
 - Waste data categorization is complete with support for 5 main categories
 - Data analysis module is functional for pattern recognition
-- Recommendation engine is under development
+- Recommendation engine is now fully implemented with basic category-based suggestions
