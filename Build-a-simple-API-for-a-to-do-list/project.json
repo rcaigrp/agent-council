@@ -7,6 +7,7 @@
     "Provide proper HTTP status codes and error handling"
   ],
   "meeting_budget": 12,
-  "meetings_held": 12,
-  "status": "complete"
+  "meetings_held": 40,
+  "status": "parked",
+  "park_reason": "Auto-parked: exceeded meeting budget by 28 meetings."
 }
