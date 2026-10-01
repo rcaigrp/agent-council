@@ -1,15 +1,10 @@
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from recommendation_engine import generate_recommendations
 
 def test_generate_recommendations():
-    # Test basic functionality
-    recommendations = generate_recommendations({'sleep_quality': 85, 'duration': 7.5})
+    from recommendation_engine import generate_recommendations
+    # Test with sample data
+    recommendations = generate_recommendations({'sleep_duration': 6.5, 'deep_sleep': 1.2})
     assert isinstance(recommendations, list)
-    assert len(recommendations) > 0  # Should return at least one recommendation
-    print('test_generate_recommendations: PASSED')
-
-if __name__ == '__main__':
-    test_generate_recommendations()
-    print('All tests passed!')
+    assert len(recommendations) > 0
