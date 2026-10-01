@@ -1,28 +1,19 @@
+from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
 class WasteItem:
-    def __init__(self, item_id, name, category, weight, date=None):
-        self.item_id = item_id
+    def __init__(self, id: int, name: str, category: str, weight: float, date: str):
+        self.id = id
         self.name = name
         self.category = category
         self.weight = weight
-        self.date = date or datetime.now()
+        self.date = date
 
-    def to_dict(self):
-        return {
-            'item_id': self.item_id,
-            'name': self.name,
-            'category': self.category,
-            'weight': self.weight,
-            'date': self.date.isoformat()
-        }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(
-            data['item_id'],
-            data['name'],
-            data['category'],
-            data['weight'],
-            datetime.fromisoformat(data['date'])
-        )
+    @staticmethod
+    def validate_fields(name: str, category: str, weight: float) -> bool:
+        return all([
+            isinstance(name, str) and len(name) > 0,
+            isinstance(category, str) and len(category) > 0,
+            isinstance(weight, (int, float)) and weight >= 0
+        ])

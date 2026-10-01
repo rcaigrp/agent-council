@@ -1,21 +1,32 @@
-class Goal:
-    def __init__(self, goal_type, target_amount):
-        self.goal_type = goal_type
-        self.target_amount = target_amount
-        self.current_amount = 0
-        self.status = 'active'
-        
+from datetime import datetime
+from sqlalchemy import Column, Integer, String, Float, DateTime, Boolean
+from sqlalchemy.orm import relationship
+from .base import Base
+
+class SustainabilityGoal(Base):
+    __tablename__ = 'sustainability_goals'
+
+    id = Column(Integer, primary_key=True)
+    title = Column(String(200), nullable=False)
+    description = Column(String(500))
+    target_weight_kg = Column(Float, nullable=False)
+    deadline = Column(DateTime, nullable=False)
+    is_active = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+
+    # Relationship
+    waste_items = relationship("WasteItem", back_populates="goal")
+
+    def __repr__(self):
+        return f"<SustainabilityGoal(id={self.id}, title='{self.title}', target_weight_kg={self.target_weight_kg})>"
+
     def to_dict(self):
         return {
-            'goal_type': self.goal_type,
-            'target_amount': self.target_amount,
-            'current_amount': self.current_amount,
-            'status': self.status
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'target_weight_kg': self.target_weight_kg,
+            'deadline': self.deadline.isoformat() if self.deadline else None,
+            'is_active': self.is_active,
+            'created_at': self.created_at.isoformat() if self.created_at else None
         }
-        
-    @classmethod
-    def from_dict(cls, data):
-        goal = cls(data['goal_type'], data['target_amount'])
-        goal.current_amount = data.get('current_amount', 0)
-        goal.status = data.get('status', 'active')
-        return goal

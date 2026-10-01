@@ -1,41 +1,45 @@
 from flask import Blueprint, request, jsonify
 from models.waste_item import WasteItem
 from models.sustainability_goal import SustainabilityGoal
+from database import Database
 
-api_bp = Blueprint('api', __name__)
+app = Blueprint('api', __name__)
+db = Database()
 
-# In-memory storage (would be replaced with database in production)
-waste_items = []
-goals = []
-
-@api_bp.route('/waste', methods=['POST'])
-def add_waste_item():
+@app.route('/waste_items', methods=['POST'])
+def create_waste_item():
     data = request.get_json()
-    waste_item = WasteItem(
-        item_id=data['item_id'],
-        name=data['name'],
-        category=data['category'],
-        weight=data['weight']
-    )
-    waste_items.append(waste_item)
-    return jsonify({'message': 'Waste item added successfully'}), 201
+    name = data.get('name')
+    category = data.get('category')
+    weight = data.get('weight')
+    date = data.get('date')
+    
+    if not WasteItem.validate_fields(name, category, weight):
+        return jsonify({'error': 'Invalid waste item data'}), 400
+    
+    waste_item = WasteItem(0, name, category, weight, date)
+    db.add_waste_item(waste_item)
+    return jsonify({'message': 'Waste item created successfully'}), 201
 
-@api_bp.route('/waste', methods=['GET'])
+@app.route('/waste_items', methods=['GET'])
 def get_waste_items():
-    return jsonify([item.to_dict() for item in waste_items])
+    items = db.get_waste_items()
+    return jsonify(items), 200
 
-@api_bp.route('/goals', methods=['POST'])
+@app.route('/goals', methods=['POST'])
 def create_goal():
     data = request.get_json()
-    goal = SustainabilityGoal(
-        goal_id=data['goal_id'],
-        description=data['description'],
-        target_amount=data['target_amount'],
-        unit=data['unit']
-    )
-    goals.append(goal)
+    description = data.get('description')
+    target_date = data.get('target_date')
+    
+    if not SustainabilityGoal.validate_fields(description, target_date):
+        return jsonify({'error': 'Invalid goal data'}), 400
+    
+    goal = SustainabilityGoal(0, description, target_date)
+    db.add_sustainability_goal(goal)
     return jsonify({'message': 'Goal created successfully'}), 201
 
-@api_bp.route('/goals', methods=['GET'])
+@app.route('/goals', methods=['GET'])
 def get_goals():
-    return jsonify([goal.to_dict() for goal in goals])
+    goals = db.get_sustainability_goals()
+    return jsonify(goals), 200

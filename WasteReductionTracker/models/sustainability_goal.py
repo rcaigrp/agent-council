@@ -1,38 +1,17 @@
+from dataclasses import dataclass
 from datetime import datetime
+from typing import Optional
 
 class SustainabilityGoal:
-    def __init__(self, goal_id, description, target_amount, unit, start_date=None, end_date=None):
-        self.goal_id = goal_id
+    def __init__(self, id: int, description: str, target_date: str, current_progress: int = 0):
+        self.id = id
         self.description = description
-        self.target_amount = target_amount
-        self.unit = unit
-        self.start_date = start_date or datetime.now()
-        self.end_date = end_date
-        self.progress = 0
+        self.target_date = target_date
+        self.current_progress = current_progress
 
-    def update_progress(self, amount):
-        self.progress += amount
-        if self.progress > self.target_amount:
-            self.progress = self.target_amount
-
-    def to_dict(self):
-        return {
-            'goal_id': self.goal_id,
-            'description': self.description,
-            'target_amount': self.target_amount,
-            'unit': self.unit,
-            'start_date': self.start_date.isoformat(),
-            'end_date': self.end_date.isoformat() if self.end_date else None,
-            'progress': self.progress
-        }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(
-            data['goal_id'],
-            data['description'],
-            data['target_amount'],
-            data['unit'],
-            datetime.fromisoformat(data['start_date']),
-            datetime.fromisoformat(data['end_date']) if data.get('end_date') else None
-        )
+    @staticmethod
+    def validate_fields(description: str, target_date: str) -> bool:
+        return all([
+            isinstance(description, str) and len(description) > 0,
+            isinstance(target_date, str) and len(target_date) > 0
+        ])
