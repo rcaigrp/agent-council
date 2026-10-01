@@ -1,18 +1,11 @@
-import unittest
-import sys
-import os
-sys.path.insert(0, os.path.dirname(__file__))
-from models.recommendation_engine import RecommendationEngine
+import pytest
+from models.recommendation import generate_recommendation
 
-class TestRecommendationEngine(unittest.TestCase):
-    def setUp(self):
-        self.engine = RecommendationEngine()
+def test_generate_recommendation():
+    result = generate_recommendation('plastic')
+    assert result is not None
+    assert isinstance(result, str)
 
-    def test_generate_recommendations(self):
-        waste_data = [{'category': 'plastic', 'amount': 5}, {'category': 'paper', 'amount': 3}]
-        recommendations = self.engine.generate_recommendations(waste_data)
-        self.assertIsInstance(recommendations, list)
-        self.assertGreater(len(recommendations), 0)
-
-if __name__ == '__main__':
-    unittest.main()
+def test_generate_recommendation_empty_input():
+    result = generate_recommendation('')
+    assert result is not None
