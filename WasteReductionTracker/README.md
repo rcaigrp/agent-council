@@ -22,7 +22,15 @@ Complete
 - Waste data categorization is complete with support for 5 main categories
 - Data analysis module is functional for pattern recognition
 - Recommendation engine is now fully implemented with basic category-based suggestions
-- Sustainability goal tracking is fully integrated with database persistence
+- Sustainability goals can now be created, updated, and tracked with proper persistence
 
-## Testing Results
-All tests pass with 100% coverage for goal management functionality
+## How to Run Tests
+```bash
+pip install pytest && python test_goal.py
+```
+
+## API Endpoints
+- `POST /goals/` - Create a new goal
+- `GET /goals/<id>` - Retrieve a specific goal
+- `PUT /goals/<id>` - Update a goal
+- `DELETE /goals/<id>` - Delete a goal
