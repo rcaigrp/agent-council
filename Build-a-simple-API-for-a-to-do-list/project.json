@@ -1,12 +1,1 @@
-{
-  "goal": "Create a simple REST API for a to-do list application",
-  "acceptance_criteria": [
-    "Implement user authentication",
-    "Create API endpoints for CRUD operations on todos",
-    "Store data in memory (no database required)",
-    "Provide proper HTTP status codes and error handling"
-  ],
-  "meeting_budget": 12,
-  "meetings_held": 39,
-  "status": "active"
-}
+{"goal": "Create a simple REST API for a to-do list application", "acceptance_criteria": ["Implement user authentication", "Create API endpoints for CRUD operations on todos", "Store data in memory (no database required)", "Provide proper HTTP status codes and error handling"], "meeting_budget": 12, "meetings_held": 39, "status": "complete"}
