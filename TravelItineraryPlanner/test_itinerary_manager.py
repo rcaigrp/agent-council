@@ -1,47 +1,29 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
+import pytest
+from itinerary_manager import Trip, Activity, Location
 
-"""
-Test cases for itinerary manager module
-"""
-
-import unittest
-from itinerary_manager import ItineraryManager, Itinerary
-
-
-class TestItineraryManager(unittest.TestCase):
-    def setUp(self):
-        self.manager = ItineraryManager()
-
-    def test_create_itinerary(self):
-        id1 = self.manager.create_itinerary("Summer Vacation", "2023-07-01", "2023-07-15", ["Paris", "Rome"])
-        self.assertEqual(id1, "1")
-
-    def test_get_itinerary(self):
-        id1 = self.manager.create_itinerary("Summer Vacation", "2023-07-01", "2023-07-15")
-        itinerary = self.manager.get_itinerary(id1)
-        self.assertIsNotNone(itinerary)
-        self.assertEqual(itinerary.title, "Summer Vacation")
-
-    def test_update_itinerary(self):
-        id1 = self.manager.create_itinerary("Summer Vacation", "2023-07-01", "2023-07-15")
-        success = self.manager.update_itinerary(id1, title="Updated Summer Vacation")
-        self.assertTrue(success)
-        itinerary = self.manager.get_itinerary(id1)
-        self.assertEqual(itinerary.title, "Updated Summer Vacation")
-
-    def test_delete_itinerary(self):
-        id1 = self.manager.create_itinerary("Summer Vacation", "2023-07-01", "2023-07-15")
-        success = self.manager.delete_itinerary(id1)
-        self.assertTrue(success)
-        self.assertIsNone(self.manager.get_itinerary(id1))
-
-    def test_list_itineraries(self):
-        self.manager.create_itinerary("Summer Vacation", "2023-07-01", "2023-07-15")
-        self.manager.create_itinerary("Winter Trip", "2023-12-01", "2023-12-15")
-        itineraries = self.manager.list_itineraries()
-        self.assertEqual(len(itineraries), 2)
+def test_trip_creation():
+    trip = Trip("Paris Trip", "2023-06-01", "2023-06-05")
+    assert trip.name == "Paris Trip"
+    assert trip.start_date == "2023-06-01"
+    assert trip.end_date == "2023-06-05"
 
 
-if __name__ == "__main__":
-    unittest.main()
+def test_activity_creation():
+    location = Location("Eiffel Tower", "Paris, France")
+    activity = Activity("Visit Eiffel Tower", "2023-06-02 10:00", "2023-06-02 12:00", location)
+    assert activity.name == "Visit Eiffel Tower"
+    assert activity.start_time == "2023-06-02 10:00"
+    assert activity.end_time == "2023-06-02 12:00"
+    assert activity.location.name == "Eiffel Tower"
+
+
+def test_invalid_trip_dates():
+    with pytest.raises(ValueError):
+        Trip("Invalid Trip", "2023-06-05", "2023-06-01")  # End date before start date
+
+
+def test_activity_overlapping():
+    location = Location("Test Location", "Test City")
+    activity1 = Activity("Activity 1", "2023-06-02 10:00", "2023-06-02 12:00", location)
+    activity2 = Activity("Activity 2", "2023-06-02 11:00", "2023-06-02 13:00", location)
+    # This should be handled by trip manager logic

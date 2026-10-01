@@ -1,24 +1,21 @@
-# Recommendation system for travel activities and accommodations
+# Recommendation System for Travel Itinerary Planner
 
 class RecommendationEngine:
+    """Handles generation of personalized recommendations for activities and accommodations"""
+    
     def __init__(self):
-        self.user_preferences = {}
-        self.activity_database = []
-        self.accommodation_database = []
-
-    def set_user_preferences(self, preferences):
-        self.user_preferences = preferences
-
-    def generate_activity_recommendations(self, trip):
-        # Placeholder for recommendation logic
+        self.recommendations = []
+        
+    def generate_activity_recommendations(self, preferences, location):
+        """Generate activity recommendations based on user preferences"""
+        # Placeholder - will be implemented with real recommendation logic
         return [
-            {'title': 'Museum Visit', 'description': 'Visit local museums', 'confidence': 0.8},
-            {'title': 'Local Market Tour', 'description': 'Explore local markets', 'confidence': 0.7}
+            {"type": "activity", "name": f"Recommended Activity for {location}", "description": "Based on your preferences"}
         ]
-
-    def generate_accommodation_recommendations(self, trip):
-        # Placeholder for accommodation recommendation logic
+        
+    def generate_accommodation_recommendations(self, preferences, location):
+        """Generate accommodation recommendations based on user preferences"""
+        # Placeholder - will be implemented with real recommendation logic
         return [
-            {'name': 'Budget Hotel', 'rating': 4.2, 'price': '$$'},
-            {'name': 'Luxury Resort', 'rating': 4.8, 'price': '$$$'}
+            {"type": "accommodation", "name": f"Recommended Hotel for {location}", "description": "Based on your preferences"}
         ]
