@@ -1,68 +1,36 @@
-from collections import defaultdict, Counter
-from datetime import datetime, timedelta
-
+from models.waste_category import WasteCategory
+from collections import defaultdict
 class WasteAnalyzer:
     def __init__(self):
-        # Predefined waste categories and their keywords
-        self.categories = {
-            'plastic': ['plastic', 'polyethylene', 'polypropylene'],
-            'paper': ['paper', 'cardboard', 'newsprint'],
-            'glass': ['glass', 'bottle', 'jar'],
-            'metal': ['metal', 'aluminum', 'steel'],
-            'organic': ['food', 'compost', 'biodegradable'],
-            'electronic': ['phone', 'laptop', 'battery', 'electronics']
-        }
+        self.category_totals = defaultdict(int)
 
-    def categorize_waste(self, item_description):
-        """
-        Categorizes a waste item based on keywords in its description
-        """
-        item_lower = item_description.lower()
-        for category, keywords in self.categories.items():
-            if any(keyword in item_lower for keyword in keywords):
-                return category
-        return 'other'
-
-    def analyze_patterns(self, waste_data):
-        """
-        Analyze waste data to identify patterns and trends
+    def analyze_waste_data(self, waste_items):
+        """Analyze waste items and return category breakdown and insights."""
+        self.category_totals.clear()
         
-        Args:
-            waste_data: List of waste items with timestamps
-        
-        Returns:
-            Dictionary containing analysis results
-        """
-        if not waste_data:
-            return {}
-        
-        # Group by category
-        category_counts = Counter(item['category'] for item in waste_data)
-        
-        # Calculate daily averages
-        dates = [item['timestamp'].date() for item in waste_data]
-        daily_counts = defaultdict(int)
-        for date in dates:
-            daily_counts[date] += 1
-        
-        # Most common categories
-        most_common = category_counts.most_common(3)
-        
-        # Trend analysis (last 7 days)
-        recent_dates = [d for d in dates if d >= datetime.now().date() - timedelta(days=7)]
-        recent_counts = Counter(recent_dates)
-        
-        trend = 'stable'
-        if len(recent_counts) >= 2:
-            values = list(recent_counts.values())
-            if values[-1] > values[0]:
-                trend = 'increasing'
-            elif values[-1] < values[0]:
-                trend = 'decreasing'
+        for item in waste_items:
+            self.category_totals[item.category] += item.quantity
         
         return {
-            'category_breakdown': dict(category_counts),
-            'most_common_categories': most_common,
-            'daily_average': sum(daily_counts.values()) / len(daily_counts) if daily_counts else 0,
-            'trend': trend
+            'category_breakdown': dict(self.category_totals),
+            'total_waste': sum(self.category_totals.values()),
+            'most_common_category': max(self.category_totals.items(), key=lambda x: x[1])[0].value if self.category_totals else None
         }
+
+    def get_recommendations(self, waste_analysis):
+        """Generate personalized recommendations based on waste analysis."""
+        recommendations = []
+        
+        if waste_analysis['total_waste'] > 10:
+            recommendations.append("Consider reducing overall consumption to decrease waste.")
+        
+        if waste_analysis['most_common_category'] == WasteCategory.PLASTIC.value:
+            recommendations.append("Try using reusable containers instead of single-use plastics.")
+        
+        if waste_analysis['most_common_category'] == WasteCategory.PAPER.value:
+            recommendations.append("Consider digital alternatives to paper when possible.")
+        
+        if waste_analysis['most_common_category'] == WasteCategory.ORGANIC.value:
+            recommendations.append("Start composting organic waste to reduce landfill contribution.")
+        
+        return recommendations

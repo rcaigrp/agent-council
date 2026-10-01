@@ -1,17 +1,29 @@
-class WasteCategory:
-    def __init__(self, name, description):
-        self.name = name
-        self.description = description
+from enum import Enum
+class WasteCategory(Enum):
+    PLASTIC = "plastic"
+    PAPER = "paper"
+    ORGANIC = "organic"
+    METAL = "metal"
+    OTHER = "other"
 
-    def __repr__(self):
-        return f"WasteCategory(name='{self.name}', description='{self.description}')"
+class WasteAnalyzer:
+    @staticmethod
+    def categorize_waste(waste_type: str) -> WasteCategory:
+        category_map = {
+            'plastic': WasteCategory.PLASTIC,
+            'paper': WasteCategory.PAPER,
+            'organic': WasteCategory.ORGANIC,
+            'metal': WasteCategory.METAL,
+            'other': WasteCategory.OTHER
+        }
+        return category_map.get(waste_type.lower(), WasteCategory.OTHER)
 
-# Define common waste categories
-PLASTIC = WasteCategory("plastic", "Plastic waste items")
-PAPER = WasteCategory("paper", "Paper and cardboard waste")
-ORGANIC = WasteCategory("organic", "Food scraps and organic waste")
-METAL = WasteCategory("metal", "Metal waste items")
-OTHER = WasteCategory("other", "Other waste categories")
-
-# All categories list
-ALL_CATEGORIES = [PLASTIC, PAPER, ORGANIC, METAL, OTHER]
+    @staticmethod
+    def analyze_patterns(waste_data):
+        categories = {}
+        for item in waste_data:
+            category = WasteAnalyzer.categorize_waste(item['type'])
+            if category not in categories:
+                categories[category] = 0
+            categories[category] += 1
+        return categories

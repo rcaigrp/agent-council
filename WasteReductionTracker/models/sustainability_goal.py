@@ -1,17 +1,28 @@
-from dataclasses import dataclass
 from datetime import datetime
-from typing import Optional
-
 class SustainabilityGoal:
-    def __init__(self, id: int, description: str, target_date: str, current_progress: int = 0):
-        self.id = id
+    def __init__(self, description, target_amount, unit, deadline):
         self.description = description
-        self.target_date = target_date
-        self.current_progress = current_progress
+        self.target_amount = target_amount
+        self.unit = unit
+        self.deadline = deadline
+        self.created_at = datetime.now()
+        self.completed = False
 
-    @staticmethod
-    def validate_fields(description: str, target_date: str) -> bool:
-        return all([
-            isinstance(description, str) and len(description) > 0,
-            isinstance(target_date, str) and len(target_date) > 0
-        ])
+    def to_dict(self):
+        return {
+            'description': self.description,
+            'target_amount': self.target_amount,
+            'unit': self.unit,
+            'deadline': self.deadline.isoformat(),
+            'created_at': self.created_at.isoformat(),
+            'completed': self.completed
+        }
+
+    @classmethod
+    def from_dict(cls, data):
+        return cls(
+            description=data['description'],
+            target_amount=data['target_amount'],
+            unit=data['unit'],
+            deadline=datetime.fromisoformat(data['deadline'])
+        )
