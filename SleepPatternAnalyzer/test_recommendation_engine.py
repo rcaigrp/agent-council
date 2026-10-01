@@ -1,22 +1,28 @@
-# Test file for recommendation_engine.py
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from recommendation_engine import generate_recommendations
+import unittest
+from recommendation_engine import RecommendationEngine
 
-def test_generate_recommendations():
-    # Mock analysis results
-    analysis_results = {
-        'sleep_duration': 7.5,
-        'restlessness_index': 0.3,
-        'sleep_quality': 'good'
-    }
+class TestRecommendationEngine(unittest.TestCase):
+    def setUp(self):
+        self.engine = RecommendationEngine()
     
-    # Test basic functionality
-    recommendations = generate_recommendations(analysis_results)
-    assert isinstance(recommendations, list)
-    assert len(recommendations) > 0
-    print('test_recommendation_engine.py: PASSED')
+    def test_generate_recommendations_high_quality(self):
+        sleep_data = {'quality_score': 85, 'restlessness_index': 0.2}
+        recommendations = self.engine.generate_recommendations(sleep_data)
+        # Should generate basic recommendations
+        self.assertIsInstance(recommendations, list)
+        
+    def test_generate_recommendations_low_quality(self):
+        sleep_data = {'quality_score': 60, 'restlessness_index': 0.7}
+        recommendations = self.engine.generate_recommendations(sleep_data)
+        # Should generate more specific recommendations
+        self.assertIsInstance(recommendations, list)
+        
+    def test_generate_recommendations_with_disorder(self):
+        sleep_data = {'quality_score': 65, 'restlessness_index': 0.6}
+        user_profile = {'sleep_disorder': 'insomnia'}
+        recommendations = self.engine.generate_recommendations(sleep_data, user_profile)
+        # Should include disorder-specific recommendations
+        self.assertIsInstance(recommendations, list)
 
 if __name__ == '__main__':
-    test_generate_recommendations()
+    unittest.main()

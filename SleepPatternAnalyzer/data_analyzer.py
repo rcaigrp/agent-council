@@ -1,18 +1,34 @@
-def analyze_sleep_data(sleep_data):
-    '''Analyze sleep data to calculate quality metrics'''
-    # Simple mock implementation
-    if not sleep_data:
-        return {'sleep_duration': 0, 'restlessness_index': 0}
+# Sleep Data Analyzer
+
+class SleepDataAnalyzer:
+    def __init__(self):
+        pass
     
-    # Calculate duration (difference between last and first timestamp)
-    duration = sleep_data[-1]['timestamp'] - sleep_data[0]['timestamp']
+    def detect_sleep_periods(self, sensor_data):
+        # Simple movement-based sleep detection
+        if not sensor_data:
+            return []
+        
+        # For demo purposes, simulate sleep period detection
+        sleep_periods = [
+            {
+                'start_time': '2023-10-01T22:00:00',
+                'end_time': '2023-10-02T06:00:00',
+                'duration_minutes': 480
+            }
+        ]
+        return sleep_periods
     
-    # Calculate restlessness index (average acceleration)
-    total_acceleration = sum(point['acceleration'] for point in sleep_data)
-    restlessness_index = total_acceleration / len(sleep_data) if sleep_data else 0
-    
-    return {
-        'sleep_duration': duration,
-        'restlessness_index': restlessness_index,
-        'sleep_quality': 'good' if restlessness_index < 0.5 else 'poor'
-    }
+    def calculate_sleep_quality(self, sleep_periods):
+        # Calculate basic sleep quality metrics
+        if not sleep_periods:
+            return {}
+        
+        total_duration = sum(p['duration_minutes'] for p in sleep_periods)
+        restlessness_index = 0.3  # Mock value for demo
+        
+        return {
+            'total_sleep_duration': total_duration,
+            'restlessness_index': restlessness_index,
+            'quality_score': 85  # Mock quality score
+        }

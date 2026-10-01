@@ -1,22 +1,22 @@
-# Test file for data_analyzer.py
-import sys
-import os
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
-from data_analyzer import analyze_sleep_data
+import unittest
+from data_analyzer import SleepDataAnalyzer
 
-def test_analyze_sleep_data():
-    # Mock sleep data
-    sleep_data = [
-        {'timestamp': 1, 'acceleration': 0.1},
-        {'timestamp': 2, 'acceleration': 0.2},
-        {'timestamp': 3, 'acceleration': 0.05}
-    ]
+class TestDataAnalyzer(unittest.TestCase):
+    def setUp(self):
+        self.analyzer = SleepDataAnalyzer()
     
-    # Test basic functionality
-    result = analyze_sleep_data(sleep_data)
-    assert 'sleep_duration' in result
-    assert 'restlessness_index' in result
-    print('test_data_analyzer.py: PASSED')
+    def test_detect_sleep_periods(self):
+        # Test with sample sensor data
+        sensor_data = [{'timestamp': '2023-10-01T22:00:00', 'movement': 0.1}]
+        periods = self.analyzer.detect_sleep_periods(sensor_data)
+        self.assertIsInstance(periods, list)
+        
+    def test_calculate_sleep_quality(self):
+        sleep_periods = [{'start_time': '2023-10-01T22:00:00', 'end_time': '2023-10-02T06:00:00', 'duration_minutes': 480}]
+        quality = self.analyzer.calculate_sleep_quality(sleep_periods)
+        self.assertIn('total_sleep_duration', quality)
+        self.assertIn('restlessness_index', quality)
+        self.assertIn('quality_score', quality)
 
 if __name__ == '__main__':
-    test_analyze_sleep_data()
+    unittest.main()
