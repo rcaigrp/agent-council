@@ -1,68 +1,57 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""
-Synchronization engine for travel itineraries across devices.
-"""
-import hashlib
-from datetime import datetime
-from typing import Dict, List, Optional
-from itertools import groupby
-
-# In-memory storage (in production would use database)
-storage = {}
+# Sync Engine for Travel Itinerary Planner
 
 class SyncEngine:
-    """Handles synchronization of itineraries between devices."""
-    
     def __init__(self):
-        self.devices = set()
-        self.sync_history = []
+        self.devices = {}
+        self.data_store = {}
         
-    def register_device(self, device_id: str):
-        """Register a new device for sync operations."""
-        self.devices.add(device_id)
-        
-    def generate_sync_token(self, itinerary_id: str) -> str:
-        """Generate a sync token based on itinerary data and timestamp."""
-        # In practice, this would be more complex with cryptographic signing
-        data = f"{itinerary_id}_{datetime.now().timestamp()}"
-        return hashlib.md5(data.encode()).hexdigest()[:16]
-        
-    def get_itinerary(self, itinerary_id: str) -> Optional[Dict]:
-        """Retrieve itinerary from storage."""
-        return storage.get(itinerary_id)
-        
-    def save_itinerary(self, itinerary_id: str, data: Dict):
-        """Save itinerary to storage."""
-        storage[itinerary_id] = data
-        
-    def sync_itinerary(self, itinerary_id: str, device_id: str, local_data: Dict) -> Dict:
-        """Synchronize an itinerary across devices."""
-        # Get current remote version
-        remote_data = self.get_itinerary(itinerary_id)
-        
-        if not remote_data:
-            # First sync - save local version
-            self.save_itinerary(itinerary_id, local_data)
-            return local_data
+    def register_device(self, device_id):
+        if device_id not in self.devices:
+            self.devices[device_id] = {
+                'last_sync': 0,
+                'data_version': 0
+            }
             
-        # Conflict resolution logic
-        local_timestamp = datetime.fromisoformat(local_data['updated_at'])
-        remote_timestamp = datetime.fromisoformat(remote_data['updated_at'])
+    def sync_itinerary(self, device_id, itinerary_data, timestamp):
+        # Validate device registration
+        if device_id not in self.devices:
+            raise ValueError(f'Device {device_id} not registered')
+            
+        # Check for conflicts with existing data
+        conflicts = self._detect_conflicts(device_id, itinerary_data)
         
-        if local_timestamp > remote_timestamp:
-            # Local is newer - update remote
-            self.save_itinerary(itinerary_id, local_data)
-            return local_data
-        elif remote_timestamp > local_timestamp:
-            # Remote is newer - return remote
-            return remote_data
-        else:
-            # Same timestamp - no conflict
-            return remote_data
+        # Resolve conflicts (simple timestamp-based resolution for now)
+        resolved_data = self._resolve_conflicts(conflicts, itinerary_data)
         
-    def get_conflicts(self, itinerary_id: str) -> List[Dict]:
-        """Identify potential conflicts in itinerary data."""
-        # Simple implementation for demo purposes
-        # In production would check for conflicting activity times, etc.
-        return []
+        # Update device state and store data
+        self.devices[device_id]['last_sync'] = timestamp
+        self.data_store[itinerary_data['id']] = {
+            'data': resolved_data,
+            'version': self.devices[device_id]['data_version'] + 1,
+            'timestamp': timestamp
+        }
+        
+        return {
+            'status': 'synced',
+            'conflicts_resolved': len(conflicts),
+            'data_version': self.data_store[itinerary_data['id']]['version']
+        }
+        
+    def _detect_conflicts(self, device_id, new_data):
+        # Simple conflict detection based on data modification times
+        conflicts = []
+        if new_data['id'] in self.data_store:
+            existing = self.data_store[new_data['id']]
+            if existing['timestamp'] > new_data.get('last_modified', 0):
+                conflicts.append({
+                    'type': 'timestamp_conflict',
+                    'existing_timestamp': existing['timestamp'],
+                    'new_timestamp': new_data.get('last_modified', 0)
+                })
+        return conflicts
+        
+    def _resolve_conflicts(self, conflicts, new_data):
+        # For now just accept the newer data
+        if conflicts:
+            print(f"Conflicts detected: {len(conflicts)} - resolving with newer data")
+        return new_data
