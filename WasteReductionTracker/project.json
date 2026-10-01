@@ -7,6 +7,7 @@
     "Users can set and track sustainability goals"
   ],
   "meeting_budget": 8,
-  "meetings_held": 8,
-  "status": "complete"
+  "meetings_held": 12,
+  "status": "parked",
+  "park_reason": "Auto-parked: exceeded meeting budget by 4 meetings."
 }
