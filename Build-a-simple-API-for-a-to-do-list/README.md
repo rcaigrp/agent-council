@@ -1,18 +1,31 @@
-# Build-a-simple-API-for-a-to-do-list
+# To-Do List API
 
-## Project Status: COMPLETE
+## Goal
+Create a simple REST API for a to-do list application
 
-All acceptance criteria have been met:
-1. ✅ User authentication implemented
-2. ✅ API endpoints for CRUD operations on todos created
-3. ✅ Data stored in memory as required
-4. ✅ Proper HTTP status codes and error handling provided
+## Acceptance Criteria
+1. Implement user authentication
+2. Create API endpoints for CRUD operations on todos
+3. Store data in memory (no database required)
+4. Provide proper HTTP status codes and error handling
 
-## Completed Work:
-- REST API with Flask framework
-- Authentication endpoints (login, register)
-- Todo management endpoints (GET, POST, PUT, DELETE)
-- In-memory data storage
-- Unit tests for all endpoints
+## Current Status
+**INCOMPLETE** - Several critical features missing:
+- Authentication not fully implemented
+- Missing update and delete endpoints
+- No proper error handling
+- Data persistence issues
 
-## Next Steps: None - Project is complete.
+## Completed Work
+- Basic Flask app structure
+- Todo model with basic attributes
+- API endpoints stubs
+
+## Next Steps
+- Implement full authentication system
+- Complete all CRUD operations
+- Add proper error handling and status codes
+- Write comprehensive tests
+
+## Test Results
+Tests currently failing due to incomplete implementation
