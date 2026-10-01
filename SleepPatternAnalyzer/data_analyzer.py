@@ -11,7 +11,10 @@ def analyze_sleep_pattern(sensor_data):
 
 def calculate_sleep_quality(duration_hours, sleep_efficiency, deep_sleep_ratio=0.3):
     '''Calculate sleep quality score based on duration and efficiency'''
-    # Simple implementation for testing purposes
-    base_score = duration_hours * 10
-    efficiency_multiplier = sleep_efficiency * 100
-    return int(base_score + efficiency_multiplier * 0.5)
+    # Ensure sleep_efficiency is a number, not a list
+    if isinstance(sleep_efficiency, list):
+        sleep_efficiency = sleep_efficiency[0] if sleep_efficiency else 0
+    
+    # Simple implementation for testing
+    quality_score = (duration_hours * 0.5) + (sleep_efficiency * 0.3) + (deep_sleep_ratio * 10)
+    return round(quality_score, 2)
