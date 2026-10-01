@@ -7,7 +7,12 @@ Create a mobile application that helps users track and reduce their daily waste 
 Active
 
 ## Acceptance Criteria
-- [ ] Application can collect data on user's daily waste items
+- [x] Application can collect data on user's daily waste items
 - [ ] Waste data is categorized and analyzed for patterns
 - [ ] Personalized recommendations are generated to reduce waste
 - [ ] Users can set and track sustainability goals
+
+## Project Structure
+- `models/` - Data models for waste items and sustainability goals
+- `api/` - API endpoints for data management
+- `app.py` - Main Flask application entry point
