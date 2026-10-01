@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Waste Reduction Tracker</title>
+</head>
+<body>
+    <h1>Waste Reduction Tracker</h1>
+    <div id="app">
+        <form id="waste-form">
+            <input type="text" id="item-name" placeholder="Item name" required>
+            <input type="number" id="quantity" placeholder="Quantity" required>
+            <select id="category">
+                <option value="plastic">Plastic</option>
+                <option value="paper">Paper</option>
+                <option value="metal">Metal</option>
+                <option value="organic">Organic</option>
+                <option value="other">Other</option>
+            </select>
+            <button type="submit">Add Waste</button>
+        </form>
+        <div id="waste-list"></div>
+    </div>
+    <script src="/static/app.js"></script>
+</body>
+</html>
