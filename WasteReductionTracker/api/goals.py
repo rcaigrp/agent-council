@@ -1,45 +1,37 @@
+# api/goals.py
+
 from flask import Blueprint, request, jsonify
-from models.goal import Goal
-from models.waste_item import WasteItem
-import json
+from models.goal import SustainabilityGoal
 
-bp = Blueprint('goals', __name__, url_prefix='/api/goals')
+goals_bp = Blueprint('goals', __name__)
 
-@bp.route('', methods=['POST'])
+goal_data = {}
+
+def get_goals_by_user(user_id):
+    return [goal for goal in goal_data.values() if goal.user_id == user_id]
+
+@goals_bp.route('/goals', methods=['POST'])
 def create_goal():
     data = request.get_json()
-    goal = Goal(
+    goal = SustainabilityGoal(
         user_id=data['user_id'],
-        target_category=data['target_category'],
+        goal_type=data['goal_type'],
         target_amount=data['target_amount'],
-        end_date=data.get('end_date')
+        time_frame=data['time_frame']
     )
-    saved_goal = Goal.save(goal)
-    return jsonify({'id': saved_goal.id, 'message': 'Goal created successfully'}), 201
+    goal_data[goal.user_id] = goal
+    return jsonify({'message': 'Goal created successfully'}), 201
 
-@bp.route('/user/<int:user_id>', methods=['GET'])
-def get_user_goals(user_id):
-    goals = Goal.get_by_user(user_id)
-    return jsonify([{
-        'id': g.id,
-        'user_id': g.user_id,
-        'target_category': g.target_category,
-        'target_amount': g.target_amount,
-        'start_date': g.start_date,
-        'end_date': g.end_date,
-        'status': g.status
-    } for g in goals])
+@goals_bp.route('/goals/<user_id>', methods=['GET'])
+def get_goals(user_id):
+    goals = get_goals_by_user(user_id)
+    return jsonify([goal.to_dict() for goal in goals])
 
-@bp.route('/<int:goal_id>', methods=['PUT'])
-def update_goal(goal_id):
+@goals_bp.route('/goals/<user_id>/<goal_type>/progress', methods=['PUT'])
+def update_progress(user_id, goal_type):
     data = request.get_json()
-    goal = Goal(
-        id=goal_id,
-        user_id=data['user_id'],
-        target_category=data['target_category'],
-        target_amount=data['target_amount'],
-        end_date=data.get('end_date'),
-        status=data.get('status', 'active')
-    )
-    Goal.update(goal)
-    return jsonify({'message': 'Goal updated successfully'}), 200
+    goal = goal_data.get(user_id)
+    if goal and goal.goal_type == goal_type:
+        progress = goal.update_progress(data['amount'])
+        return jsonify({'current_progress': progress, 'completed': goal.is_completed()})
+    return jsonify({'error': 'Goal not found'}), 404

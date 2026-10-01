@@ -1,33 +1,29 @@
-from datetime import datetime
+# models/goal.py
 
-class Goal:
-    def __init__(self, id, user_id, title, target_amount, unit, deadline, created_at=None):
-        self.id = id
+class SustainabilityGoal:
+    def __init__(self, user_id, goal_type, target_amount, time_frame):
         self.user_id = user_id
-        self.title = title
-        self.target_amount = target_amount
-        self.unit = unit
-        self.deadline = deadline
-        self.created_at = created_at or datetime.now()
+        self.goal_type = goal_type  # e.g., 'reduce_plastic_waste'
+        self.target_amount = target_amount  # e.g., 50 (percentage reduction)
+        self.time_frame = time_frame  # e.g., 'monthly', 'quarterly', 'yearly'
+        self.current_progress = 0
+        self.created_at = None
+        self.updated_at = None
+
+    def update_progress(self, amount):
+        self.current_progress += amount
+        return self.current_progress
+
+    def is_completed(self):
+        return self.current_progress >= self.target_amount
 
     def to_dict(self):
         return {
-            'id': self.id,
             'user_id': self.user_id,
-            'title': self.title,
+            'goal_type': self.goal_type,
             'target_amount': self.target_amount,
-            'unit': self.unit,
-            'deadline': self.deadline.isoformat() if isinstance(self.deadline, datetime) else self.deadline,
-            'created_at': self.created_at.isoformat() if isinstance(self.deadline, datetime) else self.created_at
+            'time_frame': self.time_frame,
+            'current_progress': self.current_progress,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }
-
-    @classmethod
-    def from_dict(cls, data):
-        return cls(
-            id=data['id'],
-            user_id=data['user_id'],
-            title=data['title'],
-            target_amount=data['target_amount'],
-            unit=data['unit'],
-            deadline=datetime.fromisoformat(data['deadline']) if isinstance(data['deadline'], str) else data['deadline']
-        )
