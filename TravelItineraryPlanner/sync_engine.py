@@ -1,57 +1,55 @@
-# Sync Engine for Travel Itinerary Planner
+import json
+from datetime import datetime, timedelta
+
+class ConflictError(Exception):
+    pass
 
 class SyncEngine:
     def __init__(self):
-        self.devices = {}
         self.data_store = {}
+
+    def sync_itinerary(self, user_id, itinerary_data):
+        if user_id not in self.data_store:
+            self.data_store[user_id] = {}
         
-    def register_device(self, device_id):
-        if device_id not in self.devices:
-            self.devices[device_id] = {
-                'last_sync': 0,
-                'data_version': 0
+        existing_itinerary = self.data_store[user_id].get('itinerary')
+        if existing_itinerary:
+            # Simple conflict resolution: merge non-overlapping activities
+            updated_activities = []
+            for new_activity in itinerary_data.get('activities', []):
+                conflicts = self._find_conflicts(existing_itinerary, new_activity)
+                if not conflicts:
+                    updated_activities.append(new_activity)
+                else:
+                    # For this version, we'll just skip conflicting activities
+                    pass
+            
+            # Merge the non-conflicting activities
+            merged_activities = existing_itinerary.get('activities', []) + updated_activities
+            self.data_store[user_id]['itinerary'] = {
+                'title': itinerary_data['title'],
+                'activities': merged_activities,
+                'destinations': itinerary_data.get('destinations', [])
             }
-            
-    def sync_itinerary(self, device_id, itinerary_data, timestamp):
-        # Validate device registration
-        if device_id not in self.devices:
-            raise ValueError(f'Device {device_id} not registered')
-            
-        # Check for conflicts with existing data
-        conflicts = self._detect_conflicts(device_id, itinerary_data)
+        else:
+            self.data_store[user_id]['itinerary'] = itinerary_data
         
-        # Resolve conflicts (simple timestamp-based resolution for now)
-        resolved_data = self._resolve_conflicts(conflicts, itinerary_data)
-        
-        # Update device state and store data
-        self.devices[device_id]['last_sync'] = timestamp
-        self.data_store[itinerary_data['id']] = {
-            'data': resolved_data,
-            'version': self.devices[device_id]['data_version'] + 1,
-            'timestamp': timestamp
-        }
-        
-        return {
-            'status': 'synced',
-            'conflicts_resolved': len(conflicts),
-            'data_version': self.data_store[itinerary_data['id']]['version']
-        }
-        
-    def _detect_conflicts(self, device_id, new_data):
-        # Simple conflict detection based on data modification times
+        return self.data_store[user_id]['itinerary']
+
+    def _find_conflicts(self, existing_itinerary, new_activity):
         conflicts = []
-        if new_data['id'] in self.data_store:
-            existing = self.data_store[new_data['id']]
-            if existing['timestamp'] > new_data.get('last_modified', 0):
-                conflicts.append({
-                    'type': 'timestamp_conflict',
-                    'existing_timestamp': existing['timestamp'],
-                    'new_timestamp': new_data.get('last_modified', 0)
-                })
+        for existing_activity in existing_itinerary.get('activities', []):
+            if self._times_overlap(existing_activity['time_range'], new_activity['time_range']):
+                conflicts.append(existing_activity)
         return conflicts
+
+    def _times_overlap(self, time_range1, time_range2):
+        start1 = datetime.fromisoformat(time_range1[0])
+        end1 = datetime.fromisoformat(time_range1[1])
+        start2 = datetime.fromisoformat(time_range2[0])
+        end2 = datetime.fromisoformat(time_range2[1])
         
-    def _resolve_conflicts(self, conflicts, new_data):
-        # For now just accept the newer data
-        if conflicts:
-            print(f"Conflicts detected: {len(conflicts)} - resolving with newer data")
-        return new_data
+        return (start1 <= start2 <= end1) or (start2 <= start1 <= end2)
+
+    def get_itinerary(self, user_id):
+        return self.data_store.get(user_id, {}).get('itinerary', {})
