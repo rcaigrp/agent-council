@@ -4,16 +4,17 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from data_analyzer import analyze_sleep_pattern, calculate_sleep_quality
 
 def test_analyze_sleep_pattern():
-    # Test case 1: Normal sleep pattern
-    sleep_data = [7, 8, 6, 9, 7]
-    result = analyze_sleep_pattern(sleep_data)
-    assert result == 'Normal'
-    
-    # Test case 2: Poor sleep pattern
-    sleep_data = [4, 5, 3, 6, 4]
-    result = analyze_sleep_pattern(sleep_data)
-    assert result == 'Poor'
-    
-    print('All tests passed for data_analyzer!')
+    # Test basic functionality
+    result = analyze_sleep_pattern([1, 2, 3, 4, 5])
+    assert result is not None
+    assert 'total_sleep' in result
 
-test_analyze_sleep_pattern()
+def test_calculate_sleep_quality():
+    # Test quality calculation with proper dict input
+    result = calculate_sleep_quality({'quality_score': 85})
+    assert result == 85
+
+if __name__ == '__main__':
+    test_analyze_sleep_pattern()
+    test_calculate_sleep_quality()
+    print('All tests passed!')

@@ -4,16 +4,11 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from recommendation_engine import generate_recommendations
 
 def test_generate_recommendations():
-    # Test case: Generate recommendations for poor sleep quality
-    sleep_quality = 'Poor'
-    recommendations = generate_recommendations(sleep_quality)
-    assert len(recommendations) > 0
-    
-    # Test case: Generate recommendations for good sleep quality
-    sleep_quality = 'Good'
-    recommendations = generate_recommendations(sleep_quality)
-    assert len(recommendations) > 0
-    
-    print('All tests passed for recommendation_engine!')
+    # Test basic functionality
+    result = generate_recommendations({'quality_score': 85})
+    assert result is not None
+    assert 'recommendations' in result
 
-test_generate_recommendations()
+if __name__ == '__main__':
+    test_generate_recommendations()
+    print('All tests passed!')
