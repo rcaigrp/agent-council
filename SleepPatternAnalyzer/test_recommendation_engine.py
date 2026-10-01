@@ -1,13 +1,19 @@
-import unittest
+import sys
+import os
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from recommendation_engine import generate_recommendations
 
-class TestRecommendationEngine(unittest.TestCase):
-    def test_generate_recommendations(self):
-        # Test with sample data
-        sleep_data = {'duration': 6, 'quality_score': 5.0}
-        recommendations = generate_recommendations(sleep_data)
-        self.assertIsInstance(recommendations, list)
-        self.assertGreater(len(recommendations), 0)
+def test_generate_recommendations():
+    # Test case: Generate recommendations for poor sleep quality
+    sleep_quality = 'Poor'
+    recommendations = generate_recommendations(sleep_quality)
+    assert len(recommendations) > 0
+    
+    # Test case: Generate recommendations for good sleep quality
+    sleep_quality = 'Good'
+    recommendations = generate_recommendations(sleep_quality)
+    assert len(recommendations) > 0
+    
+    print('All tests passed for recommendation_engine!')
 
-if __name__ == '__main__':
-    unittest.main()
+test_generate_recommendations()
