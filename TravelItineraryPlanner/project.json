@@ -1,11 +1,1 @@
-{
-  "goal": "Create a mobile application that helps travelers plan and manage their trip itineraries with real-time updates and personalized recommendations based on user preferences.",
-  "acceptance_criteria": [
-    "Application allows users to create, edit, and share travel itineraries",
-    "Itinerary data is synchronized across devices",
-    "Personalized recommendations are generated for activities and accommodations"
-  ],
-  "meeting_budget": 6,
-  "meetings_held": 6,
-  "status": "active"
-}
+{"goal": "Create a mobile application that helps travelers plan and manage their trip itineraries with real-time updates and personalized recommendations based on user preferences.", "acceptance_criteria": ["Application allows users to create, edit, and share travel itineraries", "Itinerary data is synchronized across devices", "Personalized recommendations are generated for activities and accommodations"], "meeting_budget": 6, "meetings_held": 6, "status": "complete"}
