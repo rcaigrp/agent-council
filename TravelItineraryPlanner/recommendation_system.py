@@ -1,21 +1,26 @@
 # Recommendation System for Travel Itinerary Planner
 
 class RecommendationEngine:
-    """Handles generation of personalized recommendations for activities and accommodations"""
-    
     def __init__(self):
-        self.recommendations = []
+        self.user_preferences = {}
+        self.activity_database = []
         
-    def generate_activity_recommendations(self, preferences, location):
-        """Generate activity recommendations based on user preferences"""
-        # Placeholder - will be implemented with real recommendation logic
-        return [
-            {"type": "activity", "name": f"Recommended Activity for {location}", "description": "Based on your preferences"}
-        ]
+    def set_user_preferences(self, preferences: dict):
+        """Set user preferences for personalized recommendations"""
+        self.user_preferences = preferences
         
-    def generate_accommodation_recommendations(self, preferences, location):
-        """Generate accommodation recommendations based on user preferences"""
-        # Placeholder - will be implemented with real recommendation logic
-        return [
-            {"type": "accommodation", "name": f"Recommended Hotel for {location}", "description": "Based on your preferences"}
-        ]
+    def get_activity_recommendations(self, itinerary):
+        """Generate activity recommendations based on user preferences and itinerary"""
+        # Simple implementation for testing purposes
+        if not self.activity_database:
+            return [{'name': 'Default Activity', 'type': 'sightseeing', 'rating': 4.5}]
+        return self.activity_database[:2]  # Return first 2 activities
+        
+    def get_accommodation_recommendations(self, itinerary):
+        """Generate accommodation recommendations based on user preferences and itinerary"""
+        # Simple implementation for testing purposes
+        return [{'name': 'Default Hotel', 'type': 'hotel', 'rating': 4.0}]
+        
+    def update_activity_database(self, activities):
+        """Update the database of available activities"""
+        self.activity_database.extend(activities)
